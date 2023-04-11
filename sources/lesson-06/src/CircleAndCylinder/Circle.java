@@ -1,19 +1,17 @@
-package Geomatric;
+package CircleAndCylinder;
 
-public class Circle extends Shape {
-    private double radius;
+public class Circle {
+    protected double radius;
+    protected String color;
 
-    public Circle(double radius) {
+    public Circle(double radius, String color) {
         this.radius = radius;
+        this.color = color;
     }
 
     public Circle() {
         radius = 1.0;
-    }
-
-    public Circle(String color, boolean filled, double radius) {
-        super(color, filled);
-        this.radius = radius;
+        color = "red";
     }
 
     public double getRadius() {
@@ -22,6 +20,14 @@ public class Circle extends Shape {
 
     public void setRadius(double radius) {
         this.radius = radius;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public double getArea() {
@@ -35,6 +41,6 @@ public class Circle extends Shape {
     @Override
 
     public String toString() {
-        return String.format("A Circle with radius = %f, which is a subclass of %s", radius, super.toString());
+        return String.format("A Circle with raidus = %f, color = %s", radius, color);
     }
 }
