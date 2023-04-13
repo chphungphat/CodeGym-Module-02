@@ -1,31 +1,41 @@
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
     public static User newUser = new User();
-    public static Product[] products1 = initialProduct1();
+    public static ArrayList<Product> products1 = initialProduct1();
+    public static ArrayList<Product> products2 = initialProduct2();
     public static Category newCategory1 = new Category("0A", "Mobile phone", "img", products1);
-    public static Product[] products2 = initialProduct2();
     public static Category newCategory2 = new Category("0B", "Gaming device", "img", products2);
     public static Cartline[] newCartLine = new Cartline[3];
     public static Cart newCart = decalreCart();
     public static Order newOrder = new Order("AA", newUser, new Date(), true, newCart);
+    public static CategoryList categoryList = new CategoryList();
 
-    public static Product[] initialProduct1() {
-        Product[] products = new Product[4];
-        products[0] = new Product("01", "Samsung", "img", 2000);
-        products[1] = new Product("02", "Iphone", "img", 5000);
-        products[2] = new Product("03", "Xiaomi", "img", 3000);
-        products[3] = new Product("04", "Nokia", "img", 4000);
+    public static ArrayList<Product> initialProduct1() {
+        ArrayList<Product> products = new ArrayList<>();
+        Product product1 = new Product("01", "Samsung", "img", 2000);
+        Product product2 = new Product("02", "Iphone", "img", 5000);
+        Product product3 = new Product("03", "Xiaomi", "img", 3000);
+        Product product4 = new Product("04", "Nokia", "img", 4000);
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
         return products;
     }
 
-    public static Product[] initialProduct2() {
-        Product[] products = new Product[4];
-        products[0] = new Product("01", "Nintendo", "img", 20000);
-        products[1] = new Product("02", "Playstation", "img", 30000);
-        products[2] = new Product("03", "Xbox", "img", 30000);
-        products[3] = new Product("04", "PC", "img", 40000);
+    public static ArrayList<Product> initialProduct2() {
+        ArrayList<Product> products = new ArrayList<>();
+        Product product1 = new Product("01", "Nintendo", "img", 20000);
+        Product product2 = new Product("02", "Playstation", "img", 30000);
+        Product product3 = new Product("03", "Xbox", "img", 30000);
+        Product product4 = new Product("04", "PC", "img", 40000);
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
         return products;
     }
 
@@ -50,7 +60,7 @@ public class Main {
     public static void printMainScreen() {
         System.out.println("Choose a option: ");
         System.out.println("1. Config profile");
-        System.out.println("2. Brown and add products");
+        System.out.println("2. Brown categories");
         System.out.println("3. Remove product from cart");
         System.out.println("4. Checkout and print bill");
         System.out.println("5. Exit");
@@ -104,6 +114,7 @@ public class Main {
         System.out.println();
     }
 
+    /*
     public static void browseCategoryList() {
         System.out.println("Choose a category: ");
         System.out.println("1. " + newCategory1.getName());
@@ -141,6 +152,14 @@ public class Main {
         }
     }
 
+     */
+
+    public static void browseCategoryList(CategoryList categoryList) {
+        System.out.println("List of categories");
+        categoryList.getAll();
+        System.out.println();
+    }
+
     public static void removeFromCart() {
         while (true) {
             System.out.println("Choose products to remove from cart:");
@@ -164,12 +183,16 @@ public class Main {
 
     public static void main(String[] args) {
         printLoginScreen(newUser);
+
+        categoryList.addCategory(newCategory1);
+        categoryList.addCategory(newCategory2);
+
         while (true) {
             printMainScreen();
             int choice = choosingOption();
             switch (choice) {
                 case 1 -> configProfileScreen(newUser);
-                case 2 -> browseCategoryList();
+                case 2 -> browseCategoryList(categoryList);
                 case 3 -> removeFromCart();
                 case 4 -> newOrder.printBill();
                 default -> {

@@ -1,21 +1,24 @@
+import java.util.ArrayList;
+
 public class Category {
     private String id;
     private String name;
     private String image;
-    private Product[] products;
+//    private Product[] products;
+    private ArrayList<Product> products;
+
+    public Category(String id, String name, String image, ArrayList<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.products = products;
+    }
 
     public Category() {
         this.id = "id";
         this.name = "name";
         this.image = "image";
-        this.products = new Product[4];
-    }
-
-    public Category(String id, String name, String image, Product[] products) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.products = products;
+        this.products = new ArrayList<>();
     }
 
     public String getId() {
@@ -42,11 +45,11 @@ public class Category {
         this.image = image;
     }
 
-    public Product[] getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Product[] products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 
