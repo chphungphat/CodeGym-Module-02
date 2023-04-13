@@ -3,14 +3,19 @@ package MyListTest;
 public class MyListTest {
     public static void main(String[] args) {
         MyList<Integer> listInteger = new MyList<Integer>();
-        for (int element = 0; element < 5; element++) {
+        for (int element = 0; element < 8; element++) {
             listInteger.add(element);
         }
-
-        System.out.println(listInteger.get(0));
-        System.out.println(listInteger.get(1));
-        System.out.println(listInteger.get(2));
-        System.out.println(listInteger.get(3));
-        System.out.println(listInteger.get(-1));
+//        listInteger.add(2, 10);
+        listInteger.printArray();
+        System.out.println();
+        listInteger.remove(4);
+        System.out.println(listInteger.contains(7));
+        System.out.println(listInteger.contains(4));
+        listInteger.printArray();
+        listInteger.clear();
+        if (listInteger.getElement() == null) {
+            System.out.println("List is cleared!!");
+        }
     }
 }
