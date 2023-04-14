@@ -158,6 +158,11 @@ public class MyLinkedList<E> {
         return (E) temp.getData();
     }
 
+    public void clear() {
+        head = null;
+        numNodes = 0;
+    }
+
     public void printList() {
         Node temp = head;
         if (temp == null) {
