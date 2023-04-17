@@ -1,5 +1,3 @@
-package TestMap;
-
 import java.util.*;
 
 public class TestMap {
