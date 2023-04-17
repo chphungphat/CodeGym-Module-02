@@ -1,6 +1,6 @@
 package TestMapSet;
 
-public class Student {
+public class Student implements Comparable<Student> {
     private String name;
     private int age;
     private String address;
@@ -38,5 +38,10 @@ public class Student {
     @Override
     public String toString() {
         return String.format("Student name = %s, age = %d, address = %s", getName(), getAge(), getAddress());
+    }
+
+    @Override
+    public int compareTo(Student student) {
+        return this.getName().compareTo(student.getName());
     }
 }
