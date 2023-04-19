@@ -1,5 +1,9 @@
 package ProductManage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 public class TestArrayList {
     private static Product p1 = new Product(1, "Nintendo Switch", 400);
     private static Product p2 = new Product(2, "Xbox One", 800);
@@ -26,6 +30,10 @@ public class TestArrayList {
 
         productList.removeProduct(10);
         productList.removeProduct(2);
+        productList.printList();
+
+        ProductPriceComparator priceComparator = new ProductPriceComparator();
+        Collections.sort(productList.getProducts(), priceComparator);
         productList.printList();
     }
 }

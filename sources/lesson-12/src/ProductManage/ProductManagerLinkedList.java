@@ -1,26 +1,26 @@
 package ProductManage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Scanner;
 
-public class ProductManagerArrayList {
+public class ProductManagerLinkedList {
     private final static int NOT_FOUND = -1;
-    private ArrayList<Product> products;
+    private LinkedList<Product> products;
 
-    public ProductManagerArrayList(ArrayList<Product> products) {
+    public ProductManagerLinkedList(LinkedList<Product> products) {
         this.products = products;
     }
 
-    public ProductManagerArrayList() {
-        this.products = new ArrayList<Product>();
+    public ProductManagerLinkedList() {
+        products = new LinkedList<Product>();
     }
 
-    public ArrayList<Product> getProducts() {
+    public LinkedList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(LinkedList<Product> products) {
         this.products = products;
     }
 
