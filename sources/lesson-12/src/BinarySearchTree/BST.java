@@ -1,5 +1,7 @@
 package BinarySearchTree;
 
+import java.util.ArrayList;
+
 public class BST<E extends Comparable<E>> extends AbstractTree<E> {
     protected TreeNode<E> root;
     protected int size = 0;
@@ -61,6 +63,11 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
         postorder(root);
     }
 
+    @Override
+    public TreeNode<E> find(E element) {
+        return find(element, root);
+    }
+
     protected void inorder(TreeNode<E> root) {
         if (root == null) {
             return;
@@ -86,5 +93,129 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
         postorder(root.left);
         postorder(root.right);
         System.out.print(root.element + " ");
+    }
+
+    protected TreeNode<E> find(E element, TreeNode<E> root) {
+        if (root == null || root.element == element) {
+            return root;
+        } else if (root.element.compareTo(element) < 0) {
+            return find(element, root.right);
+        } else {
+            return find(element, root.left);
+        }
+    }
+
+    public TreeNode<E> findParentCurrent(E element) {
+        return findParentCurrent(element, root);
+    }
+
+    protected TreeNode<E> findParentCurrent(E element, TreeNode<E> root) {
+        if (root == null || root.right.element == element || root.left.element == element) {
+            return root;
+        } else if (root.element.compareTo(element) < 0) {
+            return findParentCurrent(element, root.right);
+        } else {
+            return findParentCurrent(element, root.left);
+        }
+    }
+
+    public boolean checkLeft(TreeNode<E> current, TreeNode<E> parent) {
+        if (parent.left == current)  {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public TreeNode<E> findParentRightMost(TreeNode<E> current) {
+        if (current.right.right == null) {
+            return current;
+        }
+        return findParentRightMost(current.right);
+    }
+
+    public void removeNonRootNoLeft(TreeNode<E> current, TreeNode<E> parentCurrent, boolean checkLeft) {
+        if (checkLeft) {
+            parentCurrent.left = current.right;
+        } else {
+            parentCurrent.right = current.right;
+        }
+    }
+
+    public void removeNonRootHaveLeft(TreeNode<E> current, TreeNode<E> parentCurrent, boolean checkLeft) {
+        TreeNode<E> rightMostParent = findParentRightMost(current);
+        TreeNode<E> rightMost = rightMostParent.right;
+        TreeNode<E> leftChildRightMost = rightMost.left;
+        rightMostParent.right = leftChildRightMost;
+        rightMost.left = current.left;
+        rightMost.right = current.right;
+        if (checkLeft) {
+            parentCurrent.left = rightMost;
+        } else {
+            parentCurrent.right = rightMost;
+        }
+    }
+
+    public void removeNonRoot(TreeNode<E> current, boolean haveLeftChild) {
+        TreeNode<E> parentCurrent = findParentCurrent(current.element);
+        boolean checkLeft = checkLeft(current, parentCurrent);
+        if (haveLeftChild) {
+            removeNonRootNoLeft(current, parentCurrent, checkLeft);
+        } else {
+            removeNonRootHaveLeft(current, parentCurrent, checkLeft);
+        }
+    }
+
+    public void removeRoot() {
+        TreeNode<E> parentOfFarRightOfLeftTree = root.left;
+        while (parentOfFarRightOfLeftTree.right.right !=null) {
+            parentOfFarRightOfLeftTree = parentOfFarRightOfLeftTree.right;
+        }
+        root.element = parentOfFarRightOfLeftTree.right.element;
+        parentOfFarRightOfLeftTree.right = null;
+    }
+
+    @Override
+    public void remove(E element) {
+       TreeNode<E> current = find(element);
+       boolean haveLeftChild = (current.left != null);
+       if (current != root) {
+           removeNonRoot(current, haveLeftChild);
+       } else {
+           removeRoot();
+       }
+       size--;
+
+
+//       if (current != root) {
+//           TreeNode<E> parentCurrent = findParentCurrent(element);
+//           boolean checkLeft = checkLeft(current, parentCurrent);
+//           if (current.left == null) {
+//               if (checkLeft) {
+//                   parentCurrent.left = current.right;
+//                   current = null;
+//                   return;
+//               } else {
+//                   parentCurrent.right = current.right;
+//                   current = null;
+//                   return;
+//               }
+//           }
+//
+//           TreeNode<E> rightMostParent = findParentRightMost(current);
+//           TreeNode<E> rightMost = rightMostParent.right;
+//           TreeNode<E> leftChildRightMost = rightMost.left;
+//           rightMostParent.right = leftChildRightMost;
+//           rightMost.left = current.left;
+//           rightMost.right = current.right;
+//           if (checkLeft) {
+//               parentCurrent.left = rightMost;
+//               return;
+//           } else {
+//               parentCurrent.right = rightMost;
+//               return;
+//           }
+//       }
+
     }
 }
