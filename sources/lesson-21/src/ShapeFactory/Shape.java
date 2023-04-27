@@ -1,2 +1,5 @@
-package ShapeFactory;public interface Shape {
+package ShapeFactory;
+
+public interface Shape {
+    public void draw();
 }
