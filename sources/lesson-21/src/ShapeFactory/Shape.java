@@ -1,0 +1,2 @@
+package ShapeFactory;public interface Shape {
+}
