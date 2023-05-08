@@ -11,7 +11,7 @@ import java.util.List;
 public class UserService {
     private static UserService userService = new UserService();
     private static List<User> userList;
-    private static final String USER_FILEPATH = "src/data/user.cs";
+    private static final String USER_FILEPATH = "src/data/user.csv";
 
     private String notification;
     private User currentUser;
@@ -44,36 +44,38 @@ public class UserService {
         this.currentUser = currentUser;
     }
 
-    public void writeUserList() {
-        try {
-            FileOutputStream fos = new FileOutputStream(USER_FILEPATH);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(userList);
-            oos.close();
-            fos.close();
-        } catch(IOException exception) {
-            System.err.println("Error");
-            exception.printStackTrace();
-        }
-    }
 
-    public List<User> readUserList() {
-        List<User> list = new ArrayList<>();
-        try {
-            FileInputStream fis = new FileInputStream(USER_FILEPATH);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (List<User>) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch(IOException exception) {
-            System.err.println("Error");
-            exception.printStackTrace();
-        } catch (ClassNotFoundException exception) {
-            System.err.println("Class not found");
-            exception.printStackTrace();
-        }
-        return list;
-    }
+    //Read and write binary file
+//    public void writeUserList() {
+//        try {
+//            FileOutputStream fos = new FileOutputStream(USER_FILEPATH);
+//            ObjectOutputStream oos = new ObjectOutputStream(fos);
+//            oos.writeObject(userList);
+//            oos.close();
+//            fos.close();
+//        } catch(IOException exception) {
+//            System.err.println("Error");
+//            exception.printStackTrace();
+//        }
+//    }
+//
+//    public List<User> readUserList() {
+//        List<User> list = new ArrayList<>();
+//        try {
+//            FileInputStream fis = new FileInputStream(USER_FILEPATH);
+//            ObjectInputStream ois = new ObjectInputStream(fis);
+//            list = (List<User>) ois.readObject();
+//            ois.close();
+//            fis.close();
+//        } catch(IOException exception) {
+//            System.err.println("Error");
+//            exception.printStackTrace();
+//        } catch (ClassNotFoundException exception) {
+//            System.err.println("Class not found");
+//            exception.printStackTrace();
+//        }
+//        return list;
+//    }
 
     public boolean checkUser(String email) {
         for (User user : userList) {
@@ -87,10 +89,16 @@ public class UserService {
 
     public boolean checkPassword(String password) {
         if (password.equals(currentUser.getPassword())) {
+            notification = "Login successful";
             return true;
         } else {
             currentUser = null;
+            notification = "Wrong password";
         }
         return false;
+    }
+
+    public void createCustomer() {
+
     }
 }

@@ -7,6 +7,7 @@ public class Main {
         UserService userService = UserService.getInstance();
 
         loginView.displayLoginScreen();
-        userService.getCurrentUser().toString();
+        System.out.println(userService.getCurrentUser().toString());
+
     }
 }

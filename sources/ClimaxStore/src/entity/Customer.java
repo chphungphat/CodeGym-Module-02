@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Customer extends User {
     private long wallet;
@@ -13,10 +14,15 @@ public class Customer extends User {
         this.library = library;
     }
 
-    public Customer(int id, String name, String phone, String password, String email, long wallet, Library library) {
-        super(id, name, phone, password, email);
+    public Customer(int id, String name, String phone, String password, LocalDate birthday, String address, String email, long wallet, Library library) {
+        super(id, name, phone, password, birthday, address, email);
         this.wallet = wallet;
         this.library = library;
+    }
+
+    public Customer(int id, String name, String phone, String password, LocalDate birthday, String address, String email, long wallet) {
+        super(id, name, phone, password, birthday, address, email);
+        this.wallet = wallet;
     }
 
     public long getWallet() {

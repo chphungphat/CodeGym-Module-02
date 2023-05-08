@@ -1,19 +1,25 @@
 package entity;
 
+import java.time.LocalDate;
+
 public abstract class User {
     protected int id;
     protected String name;
     protected String phone;
     protected String password;
+    protected LocalDate birthday;
+    protected String address;
     protected String email;
 
     public User() {}
 
-    public User(int id, String name, String phone, String password, String email) {
+    public User(int id, String name, String phone, String password, LocalDate birthday, String address, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.password = password;
+        this.birthday = birthday;
+        this.address = address;
         this.email = email;
     }
 
@@ -57,10 +63,28 @@ public abstract class User {
         this.phone = phone;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     public String toString() {
         return (id + " " + name + "\n"
                 + "Phone: " + phone + "\n"
-                + "Email: " + email + "\n");
+                + "Email: " + email + "\n"
+                + "Birthday: " + birthday + "\n"
+                + "Address: " + address+ "\n");
     }
 }

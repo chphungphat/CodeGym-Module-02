@@ -14,13 +14,14 @@ public class Game {
 
     public Game() {};
 
-    public Game(int id, String name, long price, String developer, LocalDate releaseDate, List<String> gametags) {
+    public Game(int id, String name, long price, String developer, LocalDate releaseDate, List<String> gametags, List<Review> reviewList) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.developer = developer;
         this.releaseDate = releaseDate;
         this.gametags = gametags;
+        this.reviewList = reviewList;
     }
 
     public int getId() {
