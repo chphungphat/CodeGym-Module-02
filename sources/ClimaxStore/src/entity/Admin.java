@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Admin extends User {
     private static final Admin admin = new Admin(
-            0,
             "Admin",
             "0867179650",
             "sudo",
@@ -14,8 +13,8 @@ public class Admin extends User {
             "admin@climax.com"
     );
 
-    private Admin(int id, String name, String phone, String password, LocalDate birthday, String address, String email) {
-        super(id, name, phone, password, birthday, address, email);
+    private Admin(String name, String phone, String password, LocalDate birthday, String address, String email) {
+        super(name, phone, password, birthday, address, email);
     }
 
     public static Admin getInstance() {

@@ -5,7 +5,6 @@ import entity.Customer;
 import java.time.LocalDate;
 
 public interface ICustomerBuilder {
-    ICustomerBuilder id(int id);
     ICustomerBuilder name(String name);
     ICustomerBuilder phone(String phone);
     ICustomerBuilder password(String password);

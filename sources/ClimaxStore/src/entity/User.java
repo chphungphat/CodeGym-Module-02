@@ -3,6 +3,8 @@ package entity;
 import java.time.LocalDate;
 
 public abstract class User {
+    private static int count = 0;
+
     protected int id;
     protected String name;
     protected String phone;
@@ -13,8 +15,8 @@ public abstract class User {
 
     public User() {}
 
-    public User(int id, String name, String phone, String password, LocalDate birthday, String address, String email) {
-        this.id = id;
+    public User(String name, String phone, String password, LocalDate birthday, String address, String email) {
+        this.id = count++;
         this.name = name;
         this.phone = phone;
         this.password = password;
@@ -61,6 +63,14 @@ public abstract class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        User.count = count;
     }
 
     public String getAddress() {

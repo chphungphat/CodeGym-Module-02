@@ -5,6 +5,8 @@ import entity.Customer;
 import entity.User;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class UserService {
     private static UserService userService = new UserService();
     private static List<User> userList;
     private static final String USER_FILEPATH = "src/data/user.csv";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private String notification;
     private User currentUser;
@@ -78,6 +81,7 @@ public class UserService {
 //    }
 
     public boolean checkUser(String email) {
+        notification = "Wrong email or password";
         for (User user : userList) {
             if (user.getEmail().equals(email)) {
                 currentUser = user;
@@ -93,12 +97,11 @@ public class UserService {
             return true;
         } else {
             currentUser = null;
-            notification = "Wrong password";
         }
         return false;
     }
 
-    public void createCustomer() {
-
+    public void createCustomer(String name, String phone, String password, String birthday, String address, String email, long wallet) {
+        LocalDate dateOfBirth = LocalDate.parse(birthday, FORMATTER);
     }
 }

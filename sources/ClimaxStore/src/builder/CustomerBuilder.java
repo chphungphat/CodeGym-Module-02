@@ -5,7 +5,6 @@ import entity.Customer;
 import java.time.LocalDate;
 
 public class CustomerBuilder implements ICustomerBuilder{
-    protected int id;
     protected String name;
     protected String phone;
     protected String password;
@@ -13,12 +12,6 @@ public class CustomerBuilder implements ICustomerBuilder{
     protected String address;
     protected String email;
     protected long wallet;
-
-    @Override
-    public ICustomerBuilder id(int id) {
-        this.id = id;
-        return this;
-    }
 
     @Override
     public ICustomerBuilder name(String name) {
@@ -64,6 +57,6 @@ public class CustomerBuilder implements ICustomerBuilder{
 
     @Override
     public Customer build() {
-        return new Customer(id, name, phone, password, birthday, address, email, wallet);
+        return new Customer(name, phone, password, birthday, address, email, wallet);
     }
 }
