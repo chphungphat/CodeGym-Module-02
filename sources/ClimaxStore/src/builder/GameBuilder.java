@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class GameBuilder implements IGameBuilder{
-    protected int id;
     protected String name;
     protected long price;
     protected String developer;
@@ -15,11 +14,6 @@ public class GameBuilder implements IGameBuilder{
     protected List<String> gametags;
     protected List<Review> reviewList;
 
-    @Override
-    public IGameBuilder id(int id) {
-        this.id = id;
-        return this;
-    }
 
     @Override
     public IGameBuilder name(String name) {
@@ -59,7 +53,7 @@ public class GameBuilder implements IGameBuilder{
 
     @Override
     public Game build() {
-        return new Game(id, name, price, developer, releaseDate, gametags, reviewList);
+        return new Game(name, price, developer, releaseDate, gametags, reviewList);
     }
 
 }

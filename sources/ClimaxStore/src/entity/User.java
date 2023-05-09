@@ -95,6 +95,6 @@ public abstract class User {
                 + "Phone: " + phone + "\n"
                 + "Email: " + email + "\n"
                 + "Birthday: " + birthday + "\n"
-                + "Address: " + address+ "\n");
+                + "Address: " + address);
     }
 }

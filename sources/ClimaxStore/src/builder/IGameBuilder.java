@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IGameBuilder {
-    IGameBuilder id(int id);
     IGameBuilder name(String name);
     IGameBuilder price(long price);
     IGameBuilder developer(String developer);

@@ -28,6 +28,7 @@ public class LoginView {
                 } else {
                     System.out.println("Wrong Password");
                 }
+                System.out.printf(userService.getNotification());
             } else {
                 System.out.println("User not exist");
             }

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Game {
+    private static int count = 1;
+
     protected int id;
     protected String name;
     protected long price;
@@ -14,8 +16,8 @@ public class Game {
 
     public Game() {};
 
-    public Game(int id, String name, long price, String developer, LocalDate releaseDate, List<String> gametags, List<Review> reviewList) {
-        this.id = id;
+    public Game(String name, long price, String developer, LocalDate releaseDate, List<String> gametags, List<Review> reviewList) {
+        this.id = count++;
         this.name = name;
         this.price = price;
         this.developer = developer;

@@ -1,5 +1,6 @@
 package service;
 
+import builder.CustomerBuilder;
 import entity.Admin;
 import entity.Customer;
 import entity.User;
@@ -12,9 +13,10 @@ import java.util.List;
 
 public class UserService {
     private static UserService userService = new UserService();
-    private static List<User> userList;
-    private static final String USER_FILEPATH = "src/data/user.csv";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private List<User> userList;
+    private final String USER_FILEPATH = "src/data/user.csv";
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private String notification;
     private User currentUser;
@@ -47,7 +49,13 @@ public class UserService {
         this.currentUser = currentUser;
     }
 
+    public List<User> getUserList() {
+        return userList;
+    }
 
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
     //Read and write binary file
 //    public void writeUserList() {
 //        try {
@@ -101,7 +109,18 @@ public class UserService {
         return false;
     }
 
-    public void createCustomer(String name, String phone, String password, String birthday, String address, String email, long wallet) {
-        LocalDate dateOfBirth = LocalDate.parse(birthday, FORMATTER);
+    public void createCustomer(String name, String phone, String password, LocalDate birthday, String address, String email, long wallet) {
+        CustomerBuilder customerBuilder = new CustomerBuilder();
+        User user = customerBuilder.name(name)
+                .birthday(birthday)
+                .address(address)
+                .password(password)
+                .email(email)
+                .phone(phone)
+                .wallet(wallet)
+                .build();
+        System.out.printf("New customer info: " + ((Customer) user).toString());
+        userList.add(user);
+        currentUser = userList.get(userList.size() - 1);
     }
 }
