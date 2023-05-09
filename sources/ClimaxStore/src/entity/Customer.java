@@ -14,13 +14,13 @@ public class Customer extends User {
         this.library = library;
     }
 
-    public Customer(String name, String phone, String password, LocalDate birthday, String address, String email, long wallet, Library library) {
+    public Customer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet, Library library) {
         super(name, phone, password, birthday, address, email);
         this.wallet = wallet;
         this.library = library;
     }
 
-    public Customer(String name, String phone, String password, LocalDate birthday, String address, String email, long wallet) {
+    public Customer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet) {
         super(name, phone, password, birthday, address, email);
         this.wallet = wallet;
     }

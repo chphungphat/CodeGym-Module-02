@@ -1,6 +1,7 @@
 package service;
 
 import builder.CustomerBuilder;
+import entity.Address;
 import entity.Admin;
 import entity.Customer;
 import entity.User;
@@ -109,7 +110,7 @@ public class UserService {
         return false;
     }
 
-    public void createCustomer(String name, String phone, String password, LocalDate birthday, String address, String email, long wallet) {
+    public void createCustomer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet) {
         CustomerBuilder customerBuilder = new CustomerBuilder();
         User user = customerBuilder.name(name)
                 .birthday(birthday)

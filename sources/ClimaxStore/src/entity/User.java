@@ -10,12 +10,12 @@ public abstract class User {
     protected String phone;
     protected String password;
     protected LocalDate birthday;
-    protected String address;
+    protected Address address;
     protected String email;
 
     public User() {}
 
-    public User(String name, String phone, String password, LocalDate birthday, String address, String email) {
+    public User(String name, String phone, String password, LocalDate birthday, Address address, String email) {
         this.id = count++;
         this.name = name;
         this.phone = phone;
@@ -73,11 +73,11 @@ public abstract class User {
         User.count = count;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -95,6 +95,6 @@ public abstract class User {
                 + "Phone: " + phone + "\n"
                 + "Email: " + email + "\n"
                 + "Birthday: " + birthday + "\n"
-                + "Address: " + address);
+                + "Address: " + address.toString());
     }
 }

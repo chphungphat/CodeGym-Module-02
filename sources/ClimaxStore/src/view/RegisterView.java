@@ -2,6 +2,7 @@ package view;
 
 import builder.CustomerBuilder;
 import entity.User;
+import service.InputService;
 import service.UserService;
 
 import java.time.LocalDate;
@@ -20,23 +21,28 @@ public class RegisterView {
     }
 
     public void displayRegisterScreen() {
-        Scanner scanner = new Scanner(System.in);
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        System.out.print("Enter your name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter your email: ");
-        String email = scanner.nextLine();
-        System.out.print("Enter your phone: ");
-        String phone = scanner.nextLine();
+        String name = InputService.getInstance().inputName();
+        String email = InputService.getInstance().inputEmail();
+        String phone = InputService.getInstance().inputPhone();
+
+//        System.out.print("Enter your name: ");
+//        String name = scanner.nextLine();
+//        System.out.print("Enter your email: ");
+//        String email = scanner.nextLine();
+//        System.out.print("Enter your phone: ");
+//        String phone = scanner.nextLine();
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
-        System.out.print("Enter your birthday: ");
         LocalDate dateBirthDay = null;
-        try {
-            String birthday = scanner.nextLine();
-            dateBirthDay = LocalDate.parse(birthday, FORMATTER);
-        } catch (Exception exception) {
-            System.err.println("Invalid date");
+        while (true) {
+            try {
+                System.out.print("Enter your birthday: ");
+                String birthday = scanner.nextLine();
+                dateBirthDay = LocalDate.parse(birthday, FORMATTER);
+                break;
+            } catch (Exception exception) {
+                System.err.println("Invalid date");
+            }
         }
         System.out.print("Enter your address: ");
         String address = scanner.nextLine();

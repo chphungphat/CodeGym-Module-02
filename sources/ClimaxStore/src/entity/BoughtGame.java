@@ -14,14 +14,14 @@ public class BoughtGame extends Game{
         this.lastPlayedTime = lastPlayedTime;
     }
 
-    public BoughtGame(int id, String name, long price, String developer, LocalDate releaseDate, List<String> gametags, List<Review> reviewList, int playedTime, LocalDate lastPlayedTime) {
-        super(id, name, price, developer, releaseDate, gametags, reviewList);
+    public BoughtGame(String name, long price, String developer, LocalDate releaseDate, List<String> gametags, List<Review> reviewList, int playedTime, LocalDate lastPlayedTime) {
+        super(name, price, developer, releaseDate, gametags, reviewList);
         this.playedTime = playedTime;
         this.lastPlayedTime = lastPlayedTime;
     }
 
     public BoughtGame(Game game, int playedTime, LocalDate lastPlayedTime) {
-        super(game.getId(), game.getName(), game.getPrice(),
+        super(game.getName(), game.getPrice(),
                 game.getDeveloper(), game.getReleaseDate(), game.getGametags(),
                 game.getReviewList());
         this.playedTime = playedTime;

@@ -1,5 +1,7 @@
 package entity;
 
+import builder.AddressBuilder;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,11 +11,18 @@ public class Admin extends User {
             "0867179650",
             "sudo",
             LocalDate.parse("02-01-1998", DateTimeFormatter.ofPattern("dd-LL-yyyy")),
-            "219 Lac Long Quan street, ward 3, district 11, HCM city",
+            new AddressBuilder()
+                    .number("219")
+                    .street("Lac Long Quan")
+                    .ward("3")
+                    .district("11")
+                    .province("Ho Chi Minh city")
+                    .country("Viet Nam")
+                    .build(),
             "admin@climax.com"
     );
 
-    private Admin(String name, String phone, String password, LocalDate birthday, String address, String email) {
+    private Admin(String name, String phone, String password, LocalDate birthday, Address address, String email) {
         super(name, phone, password, birthday, address, email);
     }
 

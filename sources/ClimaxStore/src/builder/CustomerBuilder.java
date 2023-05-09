@@ -1,5 +1,6 @@
 package builder;
 
+import entity.Address;
 import entity.Customer;
 
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ public class CustomerBuilder implements ICustomerBuilder{
     protected String phone;
     protected String password;
     protected LocalDate birthday;
-    protected String address;
+    protected Address address;
     protected String email;
     protected long wallet;
 
@@ -38,7 +39,7 @@ public class CustomerBuilder implements ICustomerBuilder{
     }
 
     @Override
-    public ICustomerBuilder address(String address) {
+    public ICustomerBuilder address(Address address) {
         this.address = address;
         return this;
     }
