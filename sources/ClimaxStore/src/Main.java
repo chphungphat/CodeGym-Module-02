@@ -1,7 +1,7 @@
 import entity.Customer;
 import entity.User;
+import service.UserFileService;
 import service.UserService;
-import view.LoginView;
 import view.RegisterView;
 
 public class Main {
@@ -14,7 +14,16 @@ public class Main {
         RegisterView registerView = RegisterView.getInstance();
         UserService userService = UserService.getInstance();
 
-        registerView.displayRegisterScreen();
+//        registerView.displayRegisterScreen();
+//        for (User user : userService.getUserList()) {
+//            if (user.getName().equals("Admin")) {
+//                System.out.printf(user.toString());
+//            } else {
+//                System.out.printf(((Customer) user).toString());
+//            }
+//        }
+
+        UserFileService.getInstance().readUserList();
         for (User user : userService.getUserList()) {
             if (user.getName().equals("Admin")) {
                 System.out.printf(user.toString());
@@ -22,5 +31,6 @@ public class Main {
                 System.out.printf(((Customer) user).toString());
             }
         }
+
     }
 }

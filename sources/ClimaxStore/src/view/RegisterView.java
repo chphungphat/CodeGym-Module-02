@@ -1,13 +1,13 @@
 package view;
 
 import builder.CustomerBuilder;
+import entity.Address;
 import entity.User;
 import service.InputService;
 import service.UserService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 
 public class RegisterView {
@@ -21,31 +21,30 @@ public class RegisterView {
     }
 
     public void displayRegisterScreen() {
-        String name = InputService.getInstance().inputName();
-        String email = InputService.getInstance().inputEmail();
-        String phone = InputService.getInstance().inputPhone();
+        System.out.println("----------REGISTER----------\n");
+        String name = InputService.getInstance().inputInfo("name");
+        String email = InputService.getInstance().inputInfo("email");
+        String phone = InputService.getInstance().inputInfo("phone");
+        System.out.println("Enter password with following requirement\n" +
+                        "1. Password must contain at least one digit [0-9]\n" +
+                        "2. Password must contain at least one lowercase Latin character [a-z]\n" +
+                        "3. Password must contain at least one uppercase Latin character [A-Z]\n" +
+                        "4. Password must contain at least one special character like ! @ # & ( )\n" +
+                        "5. Password must contain a length of at least 8 characters and a maximum of 20 characters");
+        String password = InputService.getInstance().inputInfo("password");
+        LocalDate birthDay = InputService.getInstance().inputBirthDate();
+        Address address = InputService.getInstance().inputAddress();
 
-//        System.out.print("Enter your name: ");
-//        String name = scanner.nextLine();
-//        System.out.print("Enter your email: ");
-//        String email = scanner.nextLine();
-//        System.out.print("Enter your phone: ");
-//        String phone = scanner.nextLine();
-        System.out.print("Enter your password: ");
-        String password = scanner.nextLine();
-        LocalDate dateBirthDay = null;
-        while (true) {
-            try {
-                System.out.print("Enter your birthday: ");
-                String birthday = scanner.nextLine();
-                dateBirthDay = LocalDate.parse(birthday, FORMATTER);
-                break;
-            } catch (Exception exception) {
-                System.err.println("Invalid date");
-            }
-        }
-        System.out.print("Enter your address: ");
-        String address = scanner.nextLine();
-        UserService.getInstance().createCustomer(name, phone, password, dateBirthDay, address, email, 0);
+        User newUser = CustomerBuilder.getInstance()
+                .name(name)
+                .email(email)
+                .phone(phone)
+                .password(password)
+                .birthday(birthDay)
+                .address(address)
+                .wallet(0)
+                .build();
+        UserService.getInstance().addNewUser(newUser);
+
     }
 }

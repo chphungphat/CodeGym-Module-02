@@ -2,6 +2,8 @@ package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 public class Customer extends User {
     private long wallet;
@@ -45,5 +47,20 @@ public class Customer extends User {
     public String toString() {
         return super.toString() + "\n"
                 + "wallet: " + wallet;
+    }
+
+    public String[] toArray() {
+        return new String[]{            name,
+                                        phone,
+                                        password,
+                                        birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                                        address.getNumber(),
+                                        address.getStreet(),
+                                        address.getWard(),
+                                        address.getDistrict(),
+                                        address.getProvince(),
+                                        address.getCountry(),
+                                        email,
+                                        String.valueOf(wallet)};
     }
 }

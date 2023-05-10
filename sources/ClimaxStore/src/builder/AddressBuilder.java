@@ -10,6 +10,14 @@ public class AddressBuilder implements IAddressBuilder{
     private String province;
     private String country;
 
+    private static final AddressBuilder addressBuilder = new AddressBuilder();
+
+    private AddressBuilder() {}
+
+    public static AddressBuilder getInstance() {
+        return addressBuilder;
+    }
+
     @Override
     public IAddressBuilder number(String number) {
         this.number = number;

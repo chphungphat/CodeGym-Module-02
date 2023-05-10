@@ -11,7 +11,7 @@ public class Admin extends User {
             "0867179650",
             "sudo",
             LocalDate.parse("02-01-1998", DateTimeFormatter.ofPattern("dd-LL-yyyy")),
-            new AddressBuilder()
+            AddressBuilder.getInstance()
                     .number("219")
                     .street("Lac Long Quan")
                     .ward("3")

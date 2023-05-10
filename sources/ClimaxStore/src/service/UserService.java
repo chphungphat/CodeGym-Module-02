@@ -1,13 +1,9 @@
 package service;
 
-import builder.CustomerBuilder;
-import entity.Address;
 import entity.Admin;
 import entity.Customer;
 import entity.User;
 
-import java.io.*;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +12,7 @@ public class UserService {
     private static UserService userService = new UserService();
 
     private List<User> userList;
-    private final String USER_FILEPATH = "src/data/user.csv";
+
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private String notification;
@@ -110,18 +106,11 @@ public class UserService {
         return false;
     }
 
-    public void createCustomer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet) {
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        User user = customerBuilder.name(name)
-                .birthday(birthday)
-                .address(address)
-                .password(password)
-                .email(email)
-                .phone(phone)
-                .wallet(wallet)
-                .build();
-        System.out.printf("New customer info: " + ((Customer) user).toString());
-        userList.add(user);
+    public void addNewUser(User newUser) {
+        userList.add(newUser);
+        UserFileService.getInstance().writeUserList(userList);
         currentUser = userList.get(userList.size() - 1);
+        System.out.printf("New customer info: \n" + ((Customer) newUser).toString() + "\n");
+        System.out.println();
     }
 }

@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class User {
     private static int count = 0;
@@ -94,7 +95,7 @@ public abstract class User {
         return (id + " " + name + "\n"
                 + "Phone: " + phone + "\n"
                 + "Email: " + email + "\n"
-                + "Birthday: " + birthday + "\n"
+                + "Birthday: " + birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n"
                 + "Address: " + address.toString());
     }
 }

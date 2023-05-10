@@ -14,6 +14,14 @@ public class CustomerBuilder implements ICustomerBuilder{
     protected String email;
     protected long wallet;
 
+    private static final CustomerBuilder customerBuilder = new CustomerBuilder();
+
+    private CustomerBuilder() {}
+
+    public static CustomerBuilder getInstance() {
+        return customerBuilder;
+    }
+
     @Override
     public ICustomerBuilder name(String name) {
         this.name = name;

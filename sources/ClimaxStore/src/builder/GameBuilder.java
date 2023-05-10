@@ -14,6 +14,13 @@ public class GameBuilder implements IGameBuilder{
     protected List<String> gametags;
     protected List<Review> reviewList;
 
+    private static final GameBuilder gameBuilder = new GameBuilder();
+
+    private GameBuilder() {}
+
+    public static GameBuilder getInstance() {
+        return gameBuilder;
+    }
 
     @Override
     public IGameBuilder name(String name) {

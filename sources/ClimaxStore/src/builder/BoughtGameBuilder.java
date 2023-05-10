@@ -5,25 +5,33 @@ import entity.Game;
 
 import java.time.LocalDate;
 
-public class BoughGameBuilder implements IBoughGameBuilder {
+public class BoughtGameBuilder implements IBoughtGameBuilder {
     private Game game;
     private int playedTime;
     private LocalDate lastPlayedTime;
 
+    private static final BoughtGameBuilder boughtGameBuilder = new BoughtGameBuilder();
+
+    private BoughtGameBuilder() {}
+
+    public static BoughtGameBuilder getInstance() {
+        return boughtGameBuilder;
+    }
+
     @Override
-    public IBoughGameBuilder game(Game game) {
+    public IBoughtGameBuilder game(Game game) {
         this.game = game;
         return this;
     }
 
     @Override
-    public IBoughGameBuilder playedTime(int playedTime) {
+    public IBoughtGameBuilder playedTime(int playedTime) {
         this.playedTime = playedTime;
         return this;
     }
 
     @Override
-    public IBoughGameBuilder lastPlayedTime(LocalDate lastPlayedTime) {
+    public IBoughtGameBuilder lastPlayedTime(LocalDate lastPlayedTime) {
         this.lastPlayedTime = lastPlayedTime;
         return this;
     }
