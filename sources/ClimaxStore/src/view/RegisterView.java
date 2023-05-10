@@ -20,8 +20,8 @@ public class RegisterView {
         return registerView;
     }
 
-    public void displayRegisterScreen() {
-        System.out.println("----------REGISTER----------\n");
+    public void displayRegisterMenu() {
+        System.out.println("----------REGISTER----------");
         String name = InputService.getInstance().inputInfo("name");
         String email = InputService.getInstance().inputInfo("email");
         String phone = InputService.getInstance().inputInfo("phone");
@@ -45,6 +45,5 @@ public class RegisterView {
                 .wallet(0)
                 .build();
         UserService.getInstance().addNewUser(newUser);
-
     }
 }

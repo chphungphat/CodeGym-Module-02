@@ -7,19 +7,11 @@ import java.time.format.DateTimeFormatterBuilder;
 
 public class Customer extends User {
     private long wallet;
-    private Library library;
 
     public Customer() {}
 
-    public Customer(long wallet, Library library) {
+    public Customer(long wallet) {
         this.wallet = wallet;
-        this.library = library;
-    }
-
-    public Customer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet, Library library) {
-        super(name, phone, password, birthday, address, email);
-        this.wallet = wallet;
-        this.library = library;
     }
 
     public Customer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet) {
@@ -35,14 +27,6 @@ public class Customer extends User {
         this.wallet = wallet;
     }
 
-    public Library getLibrary() {
-        return library;
-    }
-
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
-
     @Override
     public String toString() {
         return super.toString() + "\n"
@@ -50,17 +34,17 @@ public class Customer extends User {
     }
 
     public String[] toArray() {
-        return new String[]{            name,
-                                        phone,
-                                        password,
-                                        birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                                        address.getNumber(),
-                                        address.getStreet(),
-                                        address.getWard(),
-                                        address.getDistrict(),
-                                        address.getProvince(),
-                                        address.getCountry(),
-                                        email,
-                                        String.valueOf(wallet)};
+        return new String[]{name,
+                            phone,
+                            password,
+                            birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                            address.getNumber(),
+                            address.getStreet(),
+                            address.getWard(),
+                            address.getDistrict(),
+                            address.getProvince(),
+                            address.getCountry(),
+                            email,
+                            String.valueOf(wallet)};
     }
 }

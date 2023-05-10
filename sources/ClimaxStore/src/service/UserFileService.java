@@ -28,14 +28,14 @@ public class UserFileService {
         return userFileService;
     }
 
-    public void writeUserList(List<User> userList) {
+    public void writeUserList() {
         try {
             FileWriter fw = new FileWriter(new File(USER_FILEPATH));
             CSVWriter csvWriter = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR,
                                                     CSVWriter.NO_QUOTE_CHARACTER,
                                                     CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                                                     CSVWriter.DEFAULT_LINE_END);
-            for (User user : userList) {
+            for (User user : UserService.getInstance().getUserList()) {
                 if (user.getName().equals("Admin")) {
                     continue;
                 }

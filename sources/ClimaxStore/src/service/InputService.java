@@ -35,10 +35,9 @@ public class InputService {
             case "password" -> regex = PASSWORD_REGEX;
         }
         Pattern pattern = Pattern.compile(regex);
-        String text = "";
         while (true) {
             System.out.print("Enter " + typeInfo + ": ");
-            text = scanner.nextLine();
+            String text = scanner.nextLine();
             Matcher matcher = pattern.matcher(text);
             if (matcher.matches()) {
                 return text;
@@ -47,66 +46,6 @@ public class InputService {
             }
         }
     }
-
-//    public String inputName() {
-//        Pattern pattern = Pattern.compile(NAME_REGEX);
-//        String text = "";
-//        while (true) {
-//            System.out.print("Enter your name: ");
-//            text = scanner.nextLine();
-//            Matcher matcher = pattern.matcher(text);
-//            if (matcher.matches()) {
-//                return text;
-//            } else {
-//                System.out.println("Invalid name");
-//            }
-//        }
-//    }
-//
-//    public String inputPhone() {
-//        Pattern pattern = Pattern.compile(PHONE_REGEX);
-//        String text = "";
-//        while (true) {
-//            System.out.print("Enter your phone: ");
-//            text = scanner.nextLine();
-//            Matcher matcher = pattern.matcher(text);
-//            if (matcher.matches()) {
-//                return text;
-//            } else {
-//                System.out.println("Invalid phone number");
-//            }
-//        }
-//    }
-//
-//    public String inputEmail() {
-//        Pattern pattern = Pattern.compile(EMAIL_REGEX);
-//        String text = "";
-//        while (true) {
-//            System.out.print("Enter your email: ");
-//            text = scanner.nextLine();
-//            Matcher matcher = pattern.matcher(text);
-//            if (matcher.matches()) {
-//                return text;
-//            } else {
-//                System.out.println("Invalid email");
-//            }
-//        }
-//    }
-//
-//    public String inputPassword() {
-//        Pattern pattern = Pattern.compile(PASSWORD_REGEX);
-//        String text = "";
-//        while (true) {
-//            System.out.print("Enter password: ");
-//            text = scanner.nextLine();
-//            Matcher matcher = pattern.matcher(text);
-//            if (matcher.matches()) {
-//                return text;
-//            } else {
-//                System.out.println("Invalid date");
-//            }
-//        }
-//    }
 
     public LocalDate inputBirthDate() {
         Pattern pattern = Pattern.compile(DATE_REGEX);
@@ -150,6 +89,10 @@ public class InputService {
                 .build();
     }
 
+    public int inputChoice() {
+        System.out.print("Enter your choice: ");
+        return scanner.nextInt();
+    }
 
 
 

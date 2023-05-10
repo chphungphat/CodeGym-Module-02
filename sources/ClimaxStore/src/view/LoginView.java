@@ -13,8 +13,9 @@ public class LoginView {
         return loginView;
     }
 
-    public void displayLoginScreen() {
+    public void displayLoginMenu() {
         while (true) {
+            System.out.println("----------LOGIN----------");
             System.out.print("Enter email: ");
             String inputEmail = new Scanner(System.in).nextLine();
             UserService userService = UserService.getInstance();

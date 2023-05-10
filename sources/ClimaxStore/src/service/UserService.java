@@ -108,9 +108,14 @@ public class UserService {
 
     public void addNewUser(User newUser) {
         userList.add(newUser);
-        UserFileService.getInstance().writeUserList(userList);
+        UserFileService.getInstance().writeUserList();
         currentUser = userList.get(userList.size() - 1);
-        System.out.printf("New customer info: \n" + ((Customer) newUser).toString() + "\n");
+        System.out.printf("New customer info: \n" + ((Customer) newUser).toString());
         System.out.println();
+    }
+
+    public void viewUserInfo() {
+        System.out.println("User info:");
+        System.out.println(((Customer) currentUser).toString());
     }
 }
