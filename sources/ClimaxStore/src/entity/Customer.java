@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Customer extends User {
     private long wallet;
+    private List<Integer> boughtGame;
 
     public Customer() {}
 
@@ -14,9 +17,10 @@ public class Customer extends User {
         this.wallet = wallet;
     }
 
-    public Customer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet) {
+    public Customer(String name, String phone, String password, LocalDate birthday, Address address, String email, long wallet, List<Integer> boughtGame) {
         super(name, phone, password, birthday, address, email);
         this.wallet = wallet;
+        this.boughtGame = boughtGame;
     }
 
     public long getWallet() {
@@ -25,6 +29,14 @@ public class Customer extends User {
 
     public void setWallet(long wallet) {
         this.wallet = wallet;
+    }
+
+    public List<Integer> getBoughtGame() {
+        return boughtGame;
+    }
+
+    public void setBoughtGame(List<Integer> boughtGame) {
+        this.boughtGame = boughtGame;
     }
 
     @Override

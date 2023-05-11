@@ -4,6 +4,7 @@ import entity.Address;
 import entity.Customer;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class CustomerBuilder implements ICustomerBuilder{
     protected String name;
@@ -13,6 +14,7 @@ public class CustomerBuilder implements ICustomerBuilder{
     protected Address address;
     protected String email;
     protected long wallet;
+    protected List<Integer> boughtGame;
 
     private static final CustomerBuilder customerBuilder = new CustomerBuilder();
 
@@ -65,7 +67,13 @@ public class CustomerBuilder implements ICustomerBuilder{
     }
 
     @Override
+    public ICustomerBuilder boughtGame(List<Integer> boughtGame) {
+        this.boughtGame = boughtGame;
+        return this;
+    }
+
+    @Override
     public Customer build() {
-        return new Customer(name, phone, password, birthday, address, email, wallet);
+        return new Customer(name, phone, password, birthday, address, email, wallet, boughtGame);
     }
 }

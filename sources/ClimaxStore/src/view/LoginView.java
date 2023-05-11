@@ -13,25 +13,25 @@ public class LoginView {
         return loginView;
     }
 
-    public void displayLoginMenu() {
-        while (true) {
-            System.out.println("----------LOGIN----------");
-            System.out.print("Enter email: ");
-            String inputEmail = new Scanner(System.in).nextLine();
-            UserService userService = UserService.getInstance();
-            if (userService.checkUser(inputEmail)) {
-                System.out.print("Enter password: ");
-                String inputPassword = new Scanner(System.in).nextLine();
-                if (userService.checkPassword(inputPassword)) {
-                    System.out.println("Login success");
-                    break;
-                } else {
-                    System.out.println("Wrong Password");
-                }
-                System.out.printf(userService.getNotification());
+    public boolean displayLoginMenu() {
+        boolean check = false;
+        System.out.println("----------LOGIN----------");
+        System.out.print("Enter email: ");
+        String inputEmail = new Scanner(System.in).nextLine();
+        UserService userService = UserService.getInstance();
+        if (userService.checkUser(inputEmail)) {
+            System.out.print("Enter password: ");
+            String inputPassword = new Scanner(System.in).nextLine();
+            if (userService.checkPassword(inputPassword)) {
+                System.out.println("Login success");
+                check = true;
             } else {
-                System.out.println("User not exist");
+                System.out.println("Wrong Password");
             }
+        } else {
+            System.out.println("User not exist");
         }
+        return check;
     }
 }
+

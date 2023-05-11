@@ -97,4 +97,8 @@ public class Game {
                 + "Release Date: " + releaseDate + "\n"
                 + "Gametags: " + printGametags() + "\n";
     }
+
+    public String[] toArray() {
+        return new String[] {}
+    }
 }

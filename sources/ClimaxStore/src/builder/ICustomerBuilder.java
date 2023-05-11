@@ -4,6 +4,7 @@ import entity.Address;
 import entity.Customer;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface ICustomerBuilder {
     ICustomerBuilder name(String name);
@@ -13,5 +14,6 @@ public interface ICustomerBuilder {
     ICustomerBuilder address(Address address);
     ICustomerBuilder email(String email);
     ICustomerBuilder wallet(long wallet);
+    ICustomerBuilder boughtGame(List<Integer> boughtGame);
     Customer build();
 }

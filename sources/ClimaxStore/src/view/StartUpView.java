@@ -27,20 +27,26 @@ public class StartUpView {
     }
 
     public void runStartUpMenu() {
-        displayStartUpMenu();
-        int choice = InputService.getInstance().inputChoice();
-        switch (choice) {
-            case LOGIN -> {
-                LoginView.getInstance().displayLoginMenu();
-            }
-            case REGISTER -> {
-                RegisterView.getInstance().displayRegisterMenu();
-                runStartUpMenu();
-                return;
-            }
-            case EXIT -> {
-                UserFileService.getInstance().writeUserList();
-                return;
+        int choice = 0;
+        while (choice != EXIT) {
+            displayStartUpMenu();
+            choice = InputService.getInstance().inputChoice();
+            switch (choice) {
+                case LOGIN -> {
+                    if (LoginView.getInstance().displayLoginMenu()) {
+                        UserInfoView.getInstance().runUserInfoMenu();
+                    }
+                }
+                case REGISTER -> {
+                    RegisterView.getInstance().displayRegisterMenu();
+                    UserInfoView.getInstance().runUserInfoMenu();
+                }
+                case EXIT -> {
+                    UserFileService.getInstance().writeUserList();
+                }
+                default -> {
+                    System.out.println("Invalid input");
+                }
             }
         }
     }

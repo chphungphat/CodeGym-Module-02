@@ -35,10 +35,12 @@ public class InputService {
             case "password" -> regex = PASSWORD_REGEX;
         }
         Pattern pattern = Pattern.compile(regex);
+        String text;
+        Matcher matcher;
         while (true) {
             System.out.print("Enter " + typeInfo + ": ");
-            String text = scanner.nextLine();
-            Matcher matcher = pattern.matcher(text);
+            text = scanner.nextLine();
+            matcher = pattern.matcher(text);
             if (matcher.matches()) {
                 return text;
             } else {
@@ -49,7 +51,7 @@ public class InputService {
 
     public LocalDate inputBirthDate() {
         Pattern pattern = Pattern.compile(DATE_REGEX);
-        String text = "";
+        String text;
         while (true) {
             System.out.print("Enter your birthday (dd/mm/yyyy): ");
             text = scanner.nextLine();

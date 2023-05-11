@@ -28,13 +28,15 @@ public class CustomerView {
     }
 
     public void runCustomerMenu() {
-        displayCustomerMenu();
-        int choice = InputService.getInstance().inputChoice();
-        switch (choice) {
-            case USER_INFO -> {
-                UserService.getInstance().viewUserInfo();
-
-            }
-        }
+       int choice = 0;
+       while (choice != LOGOUT) {
+           displayCustomerMenu();
+           choice = InputService.getInstance().inputChoice();
+           switch (choice) {
+               case USER_INFO -> {
+                   UserInfoView.getInstance().runUserInfoMenu();
+               }
+           }
+       }
     }
 }

@@ -1,9 +1,11 @@
 package service;
 
+import entity.Address;
 import entity.Admin;
 import entity.Customer;
 import entity.User;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,37 +55,6 @@ public class UserService {
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }
-    //Read and write binary file
-//    public void writeUserList() {
-//        try {
-//            FileOutputStream fos = new FileOutputStream(USER_FILEPATH);
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(userList);
-//            oos.close();
-//            fos.close();
-//        } catch(IOException exception) {
-//            System.err.println("Error");
-//            exception.printStackTrace();
-//        }
-//    }
-//
-//    public List<User> readUserList() {
-//        List<User> list = new ArrayList<>();
-//        try {
-//            FileInputStream fis = new FileInputStream(USER_FILEPATH);
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//            list = (List<User>) ois.readObject();
-//            ois.close();
-//            fis.close();
-//        } catch(IOException exception) {
-//            System.err.println("Error");
-//            exception.printStackTrace();
-//        } catch (ClassNotFoundException exception) {
-//            System.err.println("Class not found");
-//            exception.printStackTrace();
-//        }
-//        return list;
-//    }
 
     public boolean checkUser(String email) {
         notification = "Wrong email or password";
@@ -117,5 +88,29 @@ public class UserService {
     public void viewUserInfo() {
         System.out.println("User info:");
         System.out.println(((Customer) currentUser).toString());
+    }
+
+    public void updateName() {
+        String name = InputService.getInstance().inputInfo("name");
+        currentUser.setName(name);
+        System.out.println("Name has been changed to: " + currentUser.getName());
+    }
+
+    public void updatePhone() {
+        String phone = InputService.getInstance().inputInfo("phone");
+        currentUser.setPhone(phone);
+        System.out.println("Phone number has been changed to " + currentUser.getPhone());
+    }
+
+    public void updateBirthday() {
+        LocalDate date = InputService.getInstance().inputBirthDate();
+        currentUser.setBirthday(date);
+        System.out.println("Birthday has been changed to " + currentUser.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    }
+
+    public void updateAddress() {
+        Address address = InputService.getInstance().inputAddress();
+        currentUser.setAddress(address);
+        System.out.println("Address has been changed to " + currentUser.getAddress().toString());
     }
 }
