@@ -40,6 +40,7 @@ public class InputService {
         while (true) {
             System.out.print("Enter " + typeInfo + ": ");
             text = scanner.nextLine();
+//            System.out.println("WHAT THE HELL IS THIS BUG");
             matcher = pattern.matcher(text);
             if (matcher.matches()) {
                 return text;
@@ -93,9 +94,12 @@ public class InputService {
 
     public int inputChoice() {
         System.out.print("Enter your choice: ");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
-
+    public long inputFundAmount() {
+        System.out.print("Enter amount you want to add: ");
+        return Long.parseLong(scanner.nextLine());
+    }
 
 }

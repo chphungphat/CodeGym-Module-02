@@ -5,48 +5,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
-    private List<BoughtGame> gameList;
-    private List<Game> wishList;
+    private int id;
+    private List<Integer> gameList;
+    private List<Integer> wishList;
 
-    public Library(List<BoughtGame> gameList, List<Game> wishList) {
+    public Library(int id, List<Integer> gameList, List<Integer> wishList) {
+        this.id = id;
         this.gameList = gameList;
         this.wishList = wishList;
     }
 
-    public Library() {
-        gameList = new ArrayList<BoughtGame>();
-        wishList = new ArrayList<Game>();
+    public int getId() {
+        return id;
     }
 
-    public List<BoughtGame> getGameList() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Integer> getGameList() {
         return gameList;
     }
 
-    public void setGameList(List<BoughtGame> gameList) {
+    public void setGameList(List<Integer> gameList) {
         this.gameList = gameList;
     }
 
-    public List<Game> getWishList() {
+    public List<Integer> getWishList() {
         return wishList;
     }
 
-    public void setWishList(List<Game> wishList) {
+    public void setWishList(List<Integer> wishList) {
         this.wishList = wishList;
-    }
-
-    public String printGameList() {
-        String text = "";
-        for (Game element : gameList) {
-            text += element.getName() + "\n";
-        }
-        return text;
-    }
-
-    public String printWishList() {
-        String text = "";
-        for (Game element : wishList) {
-            text += element.getName() + "\n";
-        }
-        return text;
     }
 }

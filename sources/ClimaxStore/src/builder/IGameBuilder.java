@@ -11,7 +11,6 @@ public interface IGameBuilder {
     IGameBuilder price(long price);
     IGameBuilder developer(String developer);
     IGameBuilder releaseDate(LocalDate releaseDate);
-    IGameBuilder gametags(List<String> gametags);
-    IGameBuilder reviewList(List<Review> reviewList);
+    IGameBuilder gametags(List<Integer> gametags);
     Game build();
 }

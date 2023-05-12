@@ -1,5 +1,6 @@
 package view;
 
+import service.GameFileService;
 import service.InputService;
 import service.UserFileService;
 import service.UserService;
@@ -9,6 +10,7 @@ public class StartUpView {
 
     private StartUpView() {
         UserFileService.getInstance().readUserList();
+        GameFileService.getInstance().readGameList();
     }
 
     public static StartUpView getInstance() {
@@ -40,6 +42,7 @@ public class StartUpView {
                 case REGISTER -> {
                     RegisterView.getInstance().displayRegisterMenu();
                     UserInfoView.getInstance().runUserInfoMenu();
+                    CustomerView.getInstance().runCustomerMenu();
                 }
                 case EXIT -> {
                     UserFileService.getInstance().writeUserList();

@@ -14,6 +14,5 @@ public interface ICustomerBuilder {
     ICustomerBuilder address(Address address);
     ICustomerBuilder email(String email);
     ICustomerBuilder wallet(long wallet);
-    ICustomerBuilder boughtGame(List<Integer> boughtGame);
     Customer build();
 }

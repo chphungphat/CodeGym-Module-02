@@ -1,6 +1,8 @@
 package view;
 
+import service.GameFileService;
 import service.InputService;
+import service.UserFileService;
 import service.UserService;
 
 public class CustomerView {
@@ -22,9 +24,9 @@ public class CustomerView {
         System.out.println("-----------MAIN MENU-----------");
         System.out.println("1. User info");
         System.out.println("2. Add fund");
-        System.out.println("2. Library");
-        System.out.println("3. Browse shop");
-        System.out.println("4. Logout");
+        System.out.println("3. Library");
+        System.out.println("4. Browse shop");
+        System.out.println("5. Logout");
     }
 
     public void runCustomerMenu() {
@@ -35,6 +37,19 @@ public class CustomerView {
            switch (choice) {
                case USER_INFO -> {
                    UserInfoView.getInstance().runUserInfoMenu();
+               }
+               case ADD_FUND -> {
+                   AddFundView.getInstance().runAddFundMenu();
+               }
+               case BROWSE_SHOP -> {
+                    GameShopView.getInstance().runGameShopMenu();
+               }
+               case LOGOUT -> {
+                   UserFileService.getInstance().writeUserList();
+                   GameFileService.getInstance().writeGameList();
+               }
+               default -> {
+                   System.out.println("Invalid Input");
                }
            }
        }

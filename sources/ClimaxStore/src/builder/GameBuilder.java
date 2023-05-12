@@ -11,8 +11,7 @@ public class GameBuilder implements IGameBuilder{
     protected long price;
     protected String developer;
     protected LocalDate releaseDate;
-    protected List<String> gametags;
-    protected List<Review> reviewList;
+    protected List<Integer> gametags;
 
     private static final GameBuilder gameBuilder = new GameBuilder();
 
@@ -47,20 +46,14 @@ public class GameBuilder implements IGameBuilder{
     }
 
     @Override
-    public IGameBuilder gametags(List<String> gametags) {
+    public IGameBuilder gametags(List<Integer> gametags) {
         this.gametags = gametags;
         return this;
     }
 
     @Override
-    public IGameBuilder reviewList(List<Review> reviewList) {
-        this.reviewList = reviewList;
-        return this;
-    }
-
-    @Override
     public Game build() {
-        return new Game(name, price, developer, releaseDate, gametags, reviewList);
+        return new Game(name, price, developer, releaseDate, gametags);
     }
 
 }
