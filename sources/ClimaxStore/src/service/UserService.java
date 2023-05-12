@@ -113,11 +113,4 @@ public class UserService {
         currentUser.setAddress(address);
         System.out.println("Address has been changed to " + currentUser.getAddress().toString());
     }
-
-    public void addFund() {
-        long currentAmount = ((Customer) currentUser).getWallet();
-        long amount = InputService.getInstance().inputFundAmount();
-        ((Customer) currentUser).setWallet(currentAmount + amount);
-        System.out.println("Add fund successfully. Current fund is: " + ((Customer) currentUser).getWallet());
-    }
 }

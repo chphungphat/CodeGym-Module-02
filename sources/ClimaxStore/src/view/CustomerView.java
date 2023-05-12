@@ -40,6 +40,7 @@ public class CustomerView {
                }
                case ADD_FUND -> {
                    AddFundView.getInstance().runAddFundMenu();
+                   UserFileService.getInstance().writeUserList();
                }
                case BROWSE_SHOP -> {
                     GameShopView.getInstance().runGameShopMenu();

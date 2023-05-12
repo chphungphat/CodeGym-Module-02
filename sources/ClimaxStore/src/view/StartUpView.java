@@ -41,7 +41,6 @@ public class StartUpView {
                 }
                 case REGISTER -> {
                     RegisterView.getInstance().displayRegisterMenu();
-                    UserInfoView.getInstance().runUserInfoMenu();
                     CustomerView.getInstance().runCustomerMenu();
                 }
                 case EXIT -> {

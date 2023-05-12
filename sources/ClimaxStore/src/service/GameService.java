@@ -43,6 +43,7 @@ public class GameService {
     }
 
     public void viewGameList() {
+        System.out.println("--------LIST GAMES----------");
         for (Game game : gameList) {
             System.out.println(game.getId() + ". " + game.getName());
         }
@@ -62,6 +63,16 @@ public class GameService {
         currentGame = gameList.get(choice);
         System.out.println("Game info: ");
         System.out.println(currentGame.toString());
+    }
+
+    public void displayGameListById(List<Integer> gameID) {
+        for (Game game : gameList) {
+            for (Integer element : gameID) {
+                if (game.getId() == element) {
+                    System.out.println(element + ". " + game.getName());
+                }
+            }
+        }
     }
 
 }
