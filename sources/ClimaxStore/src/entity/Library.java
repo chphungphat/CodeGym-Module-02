@@ -46,4 +46,17 @@ public class Library {
     public void setWishList(List<Integer> wishList) {
         this.wishList = wishList;
     }
+
+    public String[] toArray() {
+        String[] newArray = new String[gameList.size() + wishList.size() + 1];
+        newArray[0] = String.valueOf(gameList.size());
+        for (int index = 0; index < gameList.size(); index++) {
+            newArray[index + 1] = String.valueOf(gameList.get(index));
+        }
+        for (int index = 0; index < wishList.size(); index++) {
+            newArray[index + gameList.size() + 1] = String.valueOf(gameList.get(index));
+        }
+        return newArray;
+    }
+
 }

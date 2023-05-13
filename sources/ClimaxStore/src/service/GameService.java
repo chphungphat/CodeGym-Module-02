@@ -49,6 +49,26 @@ public class GameService {
         }
     }
 
+    public void viewGameListByID(List<Integer> gameIDList) {
+        for (Game game : gameList) {
+            for (int id : gameIDList) {
+                if (game.getId() == id) {
+                    System.out.println(game.getId() + ". " + game.getName());
+                    break;
+                }
+            }
+        }
+    }
+
+    public String viewGameByID(int id) {
+        for (Game game : gameList) {
+            if (game.getId() == id) {
+                return id + ". " + game.getName();
+            }
+        }
+        return "Game not found";
+    }
+
     public void viewGameInfo() {
         System.out.println("Choose game you want to view:");
         int choice;

@@ -1,9 +1,6 @@
 package view;
 
-import service.GameFileService;
-import service.GameService;
-import service.InputService;
-import service.UserFileService;
+import service.*;
 
 public class GameShopView {
     private static final GameShopView gameShopView = new GameShopView();
@@ -18,11 +15,39 @@ public class GameShopView {
     private final int SEARCH_GAMES = 2;
     private final int EXIT = 3;
 
+    private final int VIEW_GAME = 1;
+    private final int GO_BACK = 2;
+
     public void displayGameShopMenu() {
         System.out.println("---------GAME SHOP MENU---------");
         System.out.println("1. Browse games");
         System.out.println("2. Search games");
         System.out.println("3. Exit");
+    }
+
+    public void displayViewGameMenu() {
+        System.out.println("1. View a game");
+        System.out.println("2. Go back");
+    }
+
+    public void runViewGameMenu() {
+        int choice = 0;
+        while (choice != GO_BACK) {
+            displayViewGameMenu();
+            choice = InputService.getInstance().inputChoice();
+            switch (choice) {
+                case VIEW_GAME -> {
+                    GameService.getInstance().viewGameInfo();
+                    GameShopView.getInstance().runGameShopMenu();
+                }
+                case GO_BACK -> {
+                    LibraryFileService.getInstance();
+                }
+                default -> {
+                    System.out.println("Invalid Input");
+                }
+            }
+        }
     }
 
     public void runGameShopMenu() {
@@ -33,11 +58,10 @@ public class GameShopView {
             switch (choice) {
                 case BROWSE_GAMES -> {
                     GameService.getInstance().viewGameList();
-                    GameService.getInstance().viewGameInfo();
+                    runViewGameMenu();
                 }
                 case EXIT -> {
                     UserFileService.getInstance().writeUserList();
-                    GameFileService.getInstance().writeGameList();
                 }
                 default -> {
                     System.out.println("Invalid Input");

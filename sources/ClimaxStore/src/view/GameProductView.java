@@ -25,10 +25,10 @@ public class GameProductView {
         System.out.println("3. Exit");
     }
 
-    public void runGameProductMenu(List<Integer> gameList) {
+    public void runGameProductMenu() {
         int choice = 0;
-        displayGameProductMenu();
         while (choice != EXIT) {
+            displayGameProductMenu();
             choice = InputService.getInstance().inputChoice();
             switch (choice) {
                 case BUY_GAME -> {
