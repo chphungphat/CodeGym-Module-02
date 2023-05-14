@@ -3,6 +3,7 @@ package service;
 import entity.Game;
 import entity.Library;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryService {
@@ -46,7 +47,9 @@ public class LibraryService {
     public void printBoughtGame() {
         System.out.println("List of bought games: ");
         for (int id : currentLibrary.getGameList()) {
-            System.out.println(printGame(id));
+            if (id != 0) {
+                System.out.println(printGame(id));
+            }
         }
     }
 
@@ -110,5 +113,28 @@ public class LibraryService {
         } else {
             System.out.println("Game not found im wish list");
         }
+    }
+
+    public Library toLibrary(String[] data) {
+        List<Integer> newGameList = new ArrayList<>();
+        List<Integer> newWishList = new ArrayList<>();
+
+        newGameList.add(Integer.parseInt(data[0]));
+        int gameListSize = newGameList.get(0);
+
+        for (int index = 1; index <= gameListSize; index++) {
+            newGameList.add(Integer.parseInt(data[index]));
+        }
+        for (int index = gameListSize + 1; index < data.length; index++) {
+            newWishList.add(Integer.parseInt(data[index]));
+        }
+
+        return new Library(newGameList, newWishList);
+    }
+
+    public void createNewLibrary() {
+        Library newLibrary = new Library();
+        libraryList.add(newLibrary);
+        currentLibrary = libraryList.get(libraryList.size() - 1);
     }
 }

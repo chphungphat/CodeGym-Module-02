@@ -76,6 +76,8 @@ public class UserFileService {
                         .build();
                 UserService.getInstance().getUserList().add(newUser);
             }
+            csvReader.close();
+            fr.close();
         } catch (IOException exception) {
             System.err.println("Read file Error");
             exception.printStackTrace();

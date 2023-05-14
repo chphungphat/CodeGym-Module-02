@@ -37,6 +37,8 @@ public class GameFileService {
                 String[] gameStringArray = game.toArray();
                 csvWriter.writeNext(gameStringArray);
             }
+            csvWriter.close();
+            fw.close();
         } catch (IOException exception) {
             System.err.println("Write file Error");
             exception.printStackTrace();
@@ -66,9 +68,9 @@ public class GameFileService {
                         .build();
                 GameService.getInstance().getGameList().add(newGame);
             }
-
         } catch (Exception exception) {
             System.err.println("Read file error");
+            exception.printStackTrace();
         }
     }
 }

@@ -1,9 +1,6 @@
 package service;
 
-import entity.Address;
-import entity.Admin;
-import entity.Customer;
-import entity.User;
+import entity.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -61,6 +58,12 @@ public class UserService {
         for (User user : userList) {
             if (user.getEmail().equals(email)) {
                 currentUser = user;
+                if (user.getId() != 0) {
+                    Library currentLibrary = LibraryService.getInstance().getLibraryList().get(user.getId() - 1);
+                    Cart currentCart = CartService.getInstance().getCartList().get(user.getId() - 1);
+                    LibraryService.getInstance().setCurrentLibrary(currentLibrary);
+                    CartService.getInstance().setCurrentCart(currentCart);
+                }
                 return true;
             }
         }
@@ -81,6 +84,8 @@ public class UserService {
         userList.add(newUser);
         UserFileService.getInstance().writeUserList();
         currentUser = userList.get(userList.size() - 1);
+        LibraryService.getInstance().createNewLibrary();
+        CartService.getInstance().createNewCart();
         System.out.printf("New customer info: \n" + ((Customer) newUser).toString());
         System.out.println();
     }
@@ -112,5 +117,14 @@ public class UserService {
         Address address = InputService.getInstance().inputAddress();
         currentUser.setAddress(address);
         System.out.println("Address has been changed to " + currentUser.getAddress().toString());
+    }
+
+    public String getUserNameByID(int id) {
+        for (User user : userList) {
+            if (user.getId() == id) {
+                return user.getName();
+            }
+        }
+        return "User not found";
     }
 }

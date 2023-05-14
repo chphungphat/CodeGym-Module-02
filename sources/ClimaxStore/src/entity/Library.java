@@ -21,6 +21,7 @@ public class Library {
         this.id = count++;
         gameList = new ArrayList<>();
         wishList = new ArrayList<>();
+        gameList.add(0);
     }
 
     public int getId() {
@@ -49,12 +50,11 @@ public class Library {
 
     public String[] toArray() {
         String[] newArray = new String[gameList.size() + wishList.size() + 1];
-        newArray[0] = String.valueOf(gameList.size());
         for (int index = 0; index < gameList.size(); index++) {
-            newArray[index + 1] = String.valueOf(gameList.get(index));
+            newArray[index] = String.valueOf(gameList.get(index));
         }
         for (int index = 0; index < wishList.size(); index++) {
-            newArray[index + gameList.size() + 1] = String.valueOf(gameList.get(index));
+            newArray[index + gameList.size()] = String.valueOf(gameList.get(index));
         }
         return newArray;
     }

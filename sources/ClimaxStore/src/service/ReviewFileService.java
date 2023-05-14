@@ -3,33 +3,37 @@ package service;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
-import entity.Cart;
+import entity.Review;
 
+import javax.imageio.IIOException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class CartFileService {
-    private static final CartFileService cartFileService = new CartFileService();
+public class ReviewFileService {
+    private static final ReviewFileService reviewFileService = new ReviewFileService();
 
-    private CartFileService() {}
+    private ReviewFileService() {}
 
-    public static CartFileService getInstance() {
-        return cartFileService;
+    public static ReviewFileService getInstance() {
+        return reviewFileService;
     }
 
-    private final String CART_FILEPATH = "src//data//cart.csv";
+    private final String REVIEW_FILEPATH = "src//data//review.csv";
 
-    public void writeCartList() {
+    public void writeReviewList() {
         try {
-            FileWriter fw = new FileWriter(CART_FILEPATH);
+            FileWriter fw = new FileWriter(new File(REVIEW_FILEPATH));
             CSVWriter csvWriter = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR,
                                                     CSVWriter.NO_QUOTE_CHARACTER,
                                                     CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                                                     CSVWriter.DEFAULT_LINE_END);
-            for (Cart cart : CartService.getInstance().getCartList()) {
-                String[] cartStringArray = cart.toArray();
-                csvWriter.writeNext(cartStringArray);
+            for (Review review : ReviewService.getInstance().getReviewList()) {
+                String[] reviewStringArray = review.toArray();
+                csvWriter.writeNext(reviewStringArray);
             }
             csvWriter.close();
             fw.close();
@@ -39,14 +43,15 @@ public class CartFileService {
         }
     }
 
-    public void readCartList() {
+    public void readReviewList() {
         try {
-            FileReader fr = new FileReader(CART_FILEPATH);
+            FileReader fr = new FileReader(REVIEW_FILEPATH);
             CSVReader csvReader = new CSVReader(fr);
             String[] data;
             while ((data = csvReader.readNext()) != null) {
-                Cart newCart = CartService.getInstance().toCart(data);
-                CartService.getInstance().getCartList().add(newCart);
+                LocalDate reviewDate = LocalDate.parse(data[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                Review newReview = new Review(Integer.parseInt(data[0]), Integer.parseInt(data[1]), data[2], Double.parseDouble(data[3]), reviewDate);
+                ReviewService.getInstance().getReviewList().add(newReview);
             }
             csvReader.close();
             fr.close();

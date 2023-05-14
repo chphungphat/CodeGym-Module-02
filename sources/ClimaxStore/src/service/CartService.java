@@ -4,6 +4,7 @@ import entity.Cart;
 import entity.Customer;
 import entity.Game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartService {
@@ -91,8 +92,23 @@ public class CartService {
         if (totalAmount <= ((Customer) UserService.getInstance().getCurrentUser()).getWallet()) {
             LibraryService.getInstance().addGameToLibrary(currentCart.getGameCart());
             System.out.println("Checkout successfully");
+            FundService.getInstance().subtractFund(totalAmount);
         } else {
             System.out.println("Not enough money");
         }
+    }
+
+    public Cart toCart(String[] data) {
+        List<Integer> newCart = new ArrayList<>();
+        for (String element : data) {
+            newCart.add(Integer.parseInt(element));
+        }
+        return new Cart(newCart);
+    }
+
+    public void createNewCart() {
+        Cart newCart = new Cart();
+        cartList.add(newCart);
+        currentCart = cartList.get(cartList.size() - 1);
     }
 }

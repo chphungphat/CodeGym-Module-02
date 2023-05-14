@@ -83,6 +83,7 @@ public class GameService {
         currentGame = gameList.get(choice);
         System.out.println("Game info: ");
         System.out.println(currentGame.toString());
+        System.out.println("Average rating: " + ReviewService.getInstance().getAverageRatingByGameID(currentGame.getId()));
     }
 
     public void displayGameListById(List<Integer> gameID) {
@@ -93,6 +94,15 @@ public class GameService {
                 }
             }
         }
+    }
+
+    public String getGameNameByID(int id) {
+        for (Game game : gameList) {
+            if (game.getId() == id) {
+                return game.getName();
+            }
+        }
+        return "Game not found";
     }
 
 }

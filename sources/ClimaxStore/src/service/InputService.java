@@ -102,4 +102,14 @@ public class InputService {
         return Long.parseLong(scanner.nextLine());
     }
 
+    public String inputReview() {
+        System.out.println("Write your thought about this game");
+        return scanner.nextLine();
+    }
+
+    public double inputRating() {
+        System.out.print("Enter your rating: ");
+        return scanner.nextDouble();
+    }
+
 }

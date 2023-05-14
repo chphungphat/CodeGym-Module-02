@@ -38,10 +38,9 @@ public class GameShopView {
             switch (choice) {
                 case VIEW_GAME -> {
                     GameService.getInstance().viewGameInfo();
-                    GameShopView.getInstance().runGameShopMenu();
                 }
                 case GO_BACK -> {
-                    LibraryFileService.getInstance();
+                    LibraryFileService.getInstance().writeLibraryList();
                 }
                 default -> {
                     System.out.println("Invalid Input");
@@ -62,6 +61,7 @@ public class GameShopView {
                 }
                 case EXIT -> {
                     UserFileService.getInstance().writeUserList();
+                    LibraryFileService.getInstance().writeLibraryList();
                 }
                 default -> {
                     System.out.println("Invalid Input");

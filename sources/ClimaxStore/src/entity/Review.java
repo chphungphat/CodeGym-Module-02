@@ -2,12 +2,10 @@ package entity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
 
 
 public class Review {
-    private int userReviewID;
+    private int userID;
     private int gameID;
     private String review;
     private double rating;
@@ -15,20 +13,20 @@ public class Review {
 
     public Review() {}
 
-    public Review(int userReviewID, int gameID, String review, double rating, LocalDate reviewDate) {
-        this.userReviewID = userReviewID;
+    public Review(int userID, int gameID, String review, double rating, LocalDate reviewDate) {
+        this.userID = userID;
         this.gameID = gameID;
         this.review = review;
         this.rating = rating;
         this.reviewDate = reviewDate;
     }
 
-    public int getUserReviewID() {
-        return userReviewID;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUserReviewID(int userReviewID) {
-        this.userReviewID = userReviewID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public int getGameID() {
@@ -68,5 +66,17 @@ public class Review {
         return review + "\n"
                 + "Rating: " + rating + "/10" + "\n"
                 + "Review Date: " + reviewDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public String[] toArray() {
+        String game_id = String.valueOf(gameID);
+        String user_id = String.valueOf(userID);
+        String rating_str = String.valueOf(rating);
+        String reviewDate_str = reviewDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return new String[]{user_id,
+                            game_id,
+                            review,
+                            rating_str,
+                            reviewDate_str};
     }
 }
