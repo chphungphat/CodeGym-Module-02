@@ -49,12 +49,32 @@ public class Library {
     }
 
     public String[] toArray() {
-        String[] newArray = new String[gameList.size() + wishList.size() + 1];
-        for (int index = 0; index < gameList.size(); index++) {
-            newArray[index] = String.valueOf(gameList.get(index));
-        }
-        for (int index = 0; index < wishList.size(); index++) {
-            newArray[index + gameList.size()] = String.valueOf(gameList.get(index));
+        String[] newArray = new String[gameList.size() + wishList.size()];
+        newArray[0] = String.valueOf(gameList.size() - 1);
+        if (newArray.length == 1) {
+            return newArray;
+        } else {
+            if ((gameList.size() == 1) && (wishList.size() > 0)) {
+                newArray[0] = String.valueOf(0);
+                for (int index = 0; index < wishList.size(); index++) {
+                    newArray[index + 1] = String.valueOf(wishList.get(index));
+                }
+                return newArray;
+            } else if ((gameList.size() > 1) && (wishList.size() == 0)) {
+                newArray[0] = String.valueOf(gameList.size() - 1);
+                for (int index = 0; index < gameList.size() - 1; index++) {
+                    newArray[index + 1] = String.valueOf(gameList.get(index));
+                }
+            } else if ((gameList.size() > 1) && (wishList.size() > 0)) {
+                newArray[0] = String.valueOf(gameList.size() - 1);
+                for (int index = 0; index < gameList.size() - 1; index++) {
+                    newArray[index + 1] = String.valueOf(gameList.get(index));
+                }
+                for (int index = 0; index < wishList.size(); index++) {
+                    newArray[index + gameList.size() + 1] = String.valueOf(gameList.get(index));
+                }
+                return newArray;
+            }
         }
         return newArray;
     }

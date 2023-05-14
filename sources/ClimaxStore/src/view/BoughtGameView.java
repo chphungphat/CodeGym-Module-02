@@ -34,9 +34,11 @@ public class BoughtGameView {
             switch (choice) {
                 case VIEW_GAME_INFO -> {
                     LibraryService.getInstance().viewBoughtGameInfo();
+                    System.out.println();
                 }
                 case WRITE_REVIEW -> {
                     ReviewService.getInstance().chooseGameToReview(LibraryService.getInstance().getCurrentLibrary().getGameList());
+                    System.out.println();
                     ReviewFileService.getInstance().writeReviewList();
                 }
                 default -> {

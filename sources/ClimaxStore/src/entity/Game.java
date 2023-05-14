@@ -32,6 +32,14 @@ public class Game {
             "City Building" //20
     ));
 
+    public static void displayGameTagList() {
+        int count = 0;
+        for (String element : GameTagList) {
+            System.out.println(count + ". " + element);
+            count++;
+        }
+    }
+
     protected int id;
     protected String name;
     protected long price;
@@ -112,7 +120,7 @@ public class Game {
                 + "Price: " + price + "\n"
                 + "Developer: " + developer + "\n"
                 + "Release Date: " + releaseDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n"
-                + "Gametags: " + printGametags() + "\n";
+                + "Gametags: " + printGametags();
     }
 
     public String[] gametagToArray() {

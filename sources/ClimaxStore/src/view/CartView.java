@@ -26,7 +26,6 @@ public class CartView {
     }
 
     public void runCartMenu() {
-        System.out.println("Current Cart: ");
         CartService.getInstance().printCart();
         int choice = 0;
         while ((choice != GO_BACK) || (CartService.getInstance().getCurrentCart().getGameCart().size() != 1)) {
@@ -37,6 +36,7 @@ public class CartView {
                     CartService.getInstance().checkOut();
                     CartFileService.getInstance().writeCartList();
                     LibraryFileService.getInstance().writeLibraryList();
+                    choice = GO_BACK;
                 }
                 case REMOVE_FROM_CART -> {
                     CartService.getInstance().removeAGameFromCart();

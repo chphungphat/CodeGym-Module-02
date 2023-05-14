@@ -49,7 +49,7 @@ public class LibraryService {
     public void printBoughtGame() {
         System.out.println("List of bought games: ");
         for (int id : currentLibrary.getGameList()) {
-            if (id != 0) {
+            if (currentLibrary.getGameList().indexOf(id) != 0) {
                 System.out.println(printGame(id));
             }
         }
@@ -63,21 +63,15 @@ public class LibraryService {
     }
 
     public boolean isGameInWishList(int id) {
-        for (int gameID : currentLibrary.getWishList()) {
-            if (id == gameID) {
-                return true;
-            }
-        }
-        return false;
+        return currentLibrary.getWishList().contains(id);
     }
 
     public void addGameToLibrary(List<Integer> gameIDList) {
         for (int id : gameIDList) {
             if (isGameInWishList(id)) {
-                currentLibrary.getWishList().remove(currentLibrary.getWishList().indexOf(id));
+                currentLibrary.getWishList().remove((Integer) id);
             }
             currentLibrary.getGameList().add(id);
-            currentLibrary.getGameList().set(0, currentLibrary.getGameList().size());
         }
         System.out.println("Games added to your library: ");
         for (int id : gameIDList) {
@@ -86,17 +80,13 @@ public class LibraryService {
     }
 
     public boolean isAddableToWishList(int id) {
-        for (int gameID : currentLibrary.getGameList()) {
-            if (gameID == id) {
-                System.out.println("Game already bought");
-                return false;
-            }
+        if ((currentLibrary.getGameList().indexOf(id) != 0) && (currentLibrary.getGameList().contains(id))) {
+            System.out.println("Game already bought");
+            return false;
         }
-        for (int gameID : currentLibrary.getWishList()) {
-            if (gameID == id) {
-                System.out.println("Game already in wish list");
-                return false;
-            }
+        if ((currentLibrary.getWishList().contains(id))) {
+            System.out.println("Game in your wishlist");
+            return false;
         }
         return true;
     }
@@ -113,7 +103,7 @@ public class LibraryService {
         System.out.println("Choose a game to remove");
         int id = InputService.getInstance().inputChoice();
         if (isGameInWishList(id)) {
-            currentLibrary.getWishList().remove(currentLibrary.getWishList().indexOf(id));
+            currentLibrary.getWishList().remove((Integer) id);
             System.out.println("Game removed from wish list");
         } else {
             System.out.println("Game not found im wish list");
@@ -127,13 +117,27 @@ public class LibraryService {
         newGameList.add(Integer.parseInt(data[0]));
         int gameListSize = newGameList.get(0);
 
-        for (int index = 1; index <= gameListSize; index++) {
-            newGameList.add(Integer.parseInt(data[index]));
+        if ((gameListSize == 0) && (data.length > 1)) {
+            for (int index = 1; index < data.length; index++) {
+                newWishList.add(Integer.parseInt(data[index]));
+            }
+            return new Library(newGameList, newWishList);
+        } else if ((gameListSize == 0) && (data.length == 1)){
+            return new Library(newGameList, newWishList);
+        } else if ((gameListSize > 0) && (data.length == gameListSize + 1)) {
+            for (int index = 1; index < data.length; index++) {
+                newGameList.add(Integer.parseInt(data[index]));
+            }
+            return new Library(newGameList, newWishList);
+        } else if ((gameListSize > 0) && (data.length > gameListSize + 1)) {
+            for (int index = 1; index <= gameListSize; index++) {
+                newGameList.add(Integer.parseInt(data[index]));
+            }
+            for (int index = gameListSize + 1; index < data.length; index++) {
+                newWishList.add(Integer.parseInt(data[index]));
+            }
+            return new Library(newGameList, newWishList);
         }
-        for (int index = gameListSize + 1; index < data.length; index++) {
-            newWishList.add(Integer.parseInt(data[index]));
-        }
-
         return new Library(newGameList, newWishList);
     }
 
@@ -148,8 +152,10 @@ public class LibraryService {
         int choice;
         while (true) {
             choice = InputService.getInstance().inputChoice();
-            if (!currentLibrary.getGameList().contains(choice)) {
-                System.out.println("Invalid input");
+            if ((!currentLibrary.getGameList().contains(choice))) {
+                if (currentLibrary.getWishList().indexOf(choice) != 0) {
+                    System.out.println("Invalid input");
+                }
             } else {
                 break;
             }

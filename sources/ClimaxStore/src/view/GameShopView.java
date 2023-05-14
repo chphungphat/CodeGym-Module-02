@@ -39,6 +39,7 @@ public class GameShopView {
             choice = InputService.getInstance().inputChoice();
             switch (choice) {
                 case VIEW_GAME -> {
+                    GameService.getInstance().viewGameList();
                     GameService.getInstance().viewGameInfo();
                     GameProductView.getInstance().runGameProductMenu();
                 }
@@ -62,6 +63,9 @@ public class GameShopView {
                     GameService.getInstance().viewGameList();
                     System.out.println();
                     runViewGameMenu();
+                }
+                case SEARCH_GAMES -> {
+                    SearchGameView.getInstance().runSearchMenu();
                 }
                 case VIEW_CART -> {
                     CartView.getInstance().runCartMenu();

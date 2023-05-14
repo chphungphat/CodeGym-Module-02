@@ -2,9 +2,12 @@ package service;
 
 import builder.AddressBuilder;
 import entity.Address;
+import entity.Game;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -109,7 +112,41 @@ public class InputService {
 
     public double inputRating() {
         System.out.print("Enter your rating: ");
-        return scanner.nextDouble();
+        return Double.parseDouble(scanner.nextLine());
     }
 
+    public double[] inputPriceRange() {
+        double[] result = new double[2];
+        while (true) {
+            System.out.print("Enter upper price range");
+            double upper = Double.parseDouble(scanner.nextLine());
+            System.out.print("Enter lower price range");
+            double lower = Double.parseDouble(scanner.nextLine());
+            if (upper > lower) {
+                result[0] = lower;
+                result[1] = upper;
+                break;
+            } else {
+                System.out.println("Invalid input");
+            }
+        }
+        return result;
+    }
+
+    public List<Integer> inputGameTagChoice() {
+        List<Integer> result = new ArrayList<>();
+        Game.displayGameTagList();
+        while (true) {
+            System.out.print("Enter a gametag to search, input -1 to exit");
+            int choice = Integer.parseInt(scanner.nextLine());
+            if ((choice < -1) || (choice > Game.GameTagList.size())) {
+                System.out.println("Invalid input");
+            } else if (choice == -1){
+                break;
+            } else {
+                result.add(choice);
+            }
+        }
+        return result;
+    }
 }

@@ -49,16 +49,16 @@ public class GameService {
         }
     }
 
-    public void viewGameListByID(List<Integer> gameIDList) {
-        for (Game game : gameList) {
-            for (int id : gameIDList) {
-                if (game.getId() == id) {
-                    System.out.println(game.getId() + ". " + game.getName());
-                    break;
-                }
-            }
-        }
-    }
+//    public void viewGameListByID(List<Integer> gameIDList) {
+//        for (Game game : gameList) {
+//            for (int id : gameIDList) {
+//                if (game.getId() == id) {
+//                    System.out.println(game.getId() + ". " + game.getName());
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
     public String viewGameByID(int id) {
         for (Game game : gameList) {
@@ -80,6 +80,7 @@ public class GameService {
                 break;
             }
         }
+        System.out.println();
         currentGame = gameList.get(choice - 1);
         System.out.println("Game info: ");
         System.out.println(currentGame.toString());
@@ -87,10 +88,15 @@ public class GameService {
     }
 
     public void displayGameListById(List<Integer> gameID) {
-        for (Game game : gameList) {
-            for (Integer element : gameID) {
-                if (game.getId() == element) {
-                    System.out.println(element + ". " + game.getName());
+        if (gameID.isEmpty()) {
+            System.out.println("No such game");
+        } else {
+            for (Game game : gameList) {
+                for (Integer element : gameID) {
+                    if (game.getId() == element) {
+                        System.out.println(element + ". " + game.getName());
+                        break;
+                    }
                 }
             }
         }
@@ -104,5 +110,4 @@ public class GameService {
         }
         return "Game not found";
     }
-
 }

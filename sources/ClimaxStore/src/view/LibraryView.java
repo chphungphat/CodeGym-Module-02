@@ -33,10 +33,12 @@ public class LibraryView {
             switch (choice) {
                 case VIEW_BOUGHT_GAME -> {
                     LibraryService.getInstance().printBoughtGame();
+                    System.out.println();
                     BoughtGameView.getInstance().runBoughtGameMenu();
                 }
                 case VIEW_WISH_LIST -> {
                     LibraryService.getInstance().printWishList();
+                    System.out.println();
                     WishListView.getInstance().runWishListMenu();
                 }
                 default -> {

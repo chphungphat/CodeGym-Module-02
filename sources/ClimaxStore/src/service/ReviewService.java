@@ -41,12 +41,16 @@ public class ReviewService {
     public void chooseGameToReview(List<Integer> gameID) {
         System.out.println("Select a game to write review");
         int choice = 0;
-        while (true) {
+        boolean check = false;
+        while (check == false) {
             choice = InputService.getInstance().inputChoice();
-            if (gameID.contains(choice)) {
-                break;
-            } else {
-                System.out.println("Invalid input");
+            for (int index = 1; index < gameID.size(); index++) {
+                if (gameID.get(index) == choice) {
+                    check = true;
+                }
+            }
+            if (check == false) {
+                System.out.println("Invalid Input");
             }
         }
         GameService.getInstance().setCurrentGame(GameService.getInstance().getGameList().get(choice - 1));

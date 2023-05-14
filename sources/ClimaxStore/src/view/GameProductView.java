@@ -47,6 +47,7 @@ public class GameProductView {
                     CartFileService.getInstance().writeCartList();
                     LibraryFileService.getInstance().writeLibraryList();
                     ReviewFileService.getInstance().writeReviewList();
+
                 }
                 default -> {
                     System.out.println("Invalid input");
