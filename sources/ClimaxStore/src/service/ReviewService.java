@@ -5,12 +5,15 @@ import entity.Review;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewService {
     private static final ReviewService reviewService = new ReviewService();
 
-    private ReviewService() {}
+    private ReviewService() {
+        reviewList = new ArrayList<>();
+    }
 
     public static ReviewService getInstance() {
         return reviewService;
@@ -35,16 +38,35 @@ public class ReviewService {
         this.currentReview = currentReview;
     }
 
+    public void chooseGameToReview(List<Integer> gameID) {
+        System.out.println("Select a game to write review");
+        int choice = 0;
+        while (true) {
+            choice = InputService.getInstance().inputChoice();
+            if (gameID.contains(choice)) {
+                break;
+            } else {
+                System.out.println("Invalid input");
+            }
+        }
+        GameService.getInstance().setCurrentGame(GameService.getInstance().getGameList().get(choice - 1));
+        writeReview();
+    }
+
     public void writeReview() {
-        int user_id = UserService.getInstance().getCurrentUser().getId();
-        int game_id = GameService.getInstance().getCurrentGame().getId();
-        String review = InputService.getInstance().inputReview();
-        double rating = InputService.getInstance().inputRating();
-        LocalDate date = LocalDate.now();
-        Review newReview = new Review(user_id, game_id, review, rating, date);
-        reviewList.add(newReview);
-        currentReview = reviewList.get(reviewList.size() - 1);
-        System.out.println("Review posted");
+        if (!isGameReviewedByUser()) {
+            int user_id = UserService.getInstance().getCurrentUser().getId();
+            int game_id = GameService.getInstance().getCurrentGame().getId();
+            String review = InputService.getInstance().inputReview();
+            double rating = InputService.getInstance().inputRating();
+            LocalDate date = LocalDate.now();
+            Review newReview = new Review(user_id, game_id, review, rating, date);
+            reviewList.add(newReview);
+            currentReview = reviewList.get(reviewList.size() - 1);
+            System.out.println("Review posted");
+        } else {
+            System.out.println("You already review this game");
+        }
     }
 
     public void displayCurrentReview() {
@@ -69,14 +91,55 @@ public class ReviewService {
         return totalRating / count;
     }
 
-    public void displayReviewByGameID(int id) {
-        System.out.println("All review about " + GameService.getInstance().getGameNameByID(id));
+    public boolean isGameReviewed(int id) {
         for (Review element : reviewList) {
             if (element.getGameID() == id) {
-                currentReview = element;
-                displayCurrentReview();
-                System.out.println();
+                return true;
             }
         }
+        return false;
+    }
+
+    public boolean isGameReviewedByUser() {
+        int user_id = UserService.getInstance().getCurrentUser().getId();
+        int game_id = GameService.getInstance().getCurrentGame().getId();
+        for (Review review : reviewList) {
+            if ((review.getGameID() == game_id) &&  (review.getUserID() == user_id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void displayReviewByGameID() {
+        int id = GameService.getInstance().getCurrentGame().getId();
+        String GameName = GameService.getInstance().getGameNameByID(id);
+        if (isGameReviewed(id)) {
+            System.out.println("All review about " + GameName);
+            for (Review element : reviewList) {
+                if (element.getGameID() == id) {
+                    currentReview = element;
+                    displayCurrentReview();
+                    System.out.println();
+                }
+            }
+        } else {
+            System.out.println("No review about this game yet");
+        }
+    }
+
+    public void displayReviewByChoice(List<Integer> gameID) {
+        System.out.println("Select a game to view reviews");
+        int id = 0;
+        while (true) {
+            id = InputService.getInstance().inputChoice();
+            if (gameID.contains(id)) {
+                break;
+            } else {
+                System.out.println("Invalid Input");
+            }
+        }
+        GameService.getInstance().setCurrentGame(GameService.getInstance().getGameList().get(id - 1));
+        displayReviewByGameID();
     }
 }

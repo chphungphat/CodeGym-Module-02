@@ -9,7 +9,9 @@ import java.util.List;
 public class LibraryService {
     private static final LibraryService libraryService = new LibraryService();
 
-    private LibraryService() {}
+    private LibraryService() {
+        libraryList = new ArrayList<>();
+    }
 
     public static LibraryService getInstance() {
         return libraryService;
@@ -75,6 +77,7 @@ public class LibraryService {
                 currentLibrary.getWishList().remove(currentLibrary.getWishList().indexOf(id));
             }
             currentLibrary.getGameList().add(id);
+            currentLibrary.getGameList().set(0, currentLibrary.getGameList().size());
         }
         System.out.println("Games added to your library: ");
         for (int id : gameIDList) {
@@ -102,11 +105,13 @@ public class LibraryService {
         int id = GameService.getInstance().getCurrentGame().getId();
         if (isAddableToWishList(id)) {
             currentLibrary.getWishList().add(id);
-            System.out.println("Game added to library");
+            System.out.println("Game added to wish list");
         }
     }
 
-    public void removeGameFromWishList(int id) {
+    public void removeGameFromWishList() {
+        System.out.println("Choose a game to remove");
+        int id = InputService.getInstance().inputChoice();
         if (isGameInWishList(id)) {
             currentLibrary.getWishList().remove(currentLibrary.getWishList().indexOf(id));
             System.out.println("Game removed from wish list");
@@ -136,5 +141,41 @@ public class LibraryService {
         Library newLibrary = new Library();
         libraryList.add(newLibrary);
         currentLibrary = libraryList.get(libraryList.size() - 1);
+    }
+
+    public void viewBoughtGameInfo() {
+        System.out.println("Choose game you want to view:");
+        int choice;
+        while (true) {
+            choice = InputService.getInstance().inputChoice();
+            if (!currentLibrary.getGameList().contains(choice)) {
+                System.out.println("Invalid input");
+            } else {
+                break;
+            }
+        }
+        GameService.getInstance().setCurrentGame(GameService.getInstance().getGameList().get(choice - 1));
+        Game currentGame = GameService.getInstance().getCurrentGame();
+        System.out.println("Game info: ");
+        System.out.println(currentGame.toString());
+        System.out.println("Average rating: " + ReviewService.getInstance().getAverageRatingByGameID(currentGame.getId()));
+    }
+
+    public void viewWishedtGameInfo() {
+        System.out.println("Choose game you want to view:");
+        int choice;
+        while (true) {
+            choice = InputService.getInstance().inputChoice();
+            if (!currentLibrary.getWishList().contains(choice)) {
+                System.out.println("Invalid input");
+            } else {
+                break;
+            }
+        }
+        GameService.getInstance().setCurrentGame(GameService.getInstance().getGameList().get(choice - 1));
+        Game currentGame = GameService.getInstance().getCurrentGame();
+        System.out.println("Game info: ");
+        System.out.println(currentGame.toString());
+        System.out.println("Average rating: " + ReviewService.getInstance().getAverageRatingByGameID(currentGame.getId()));
     }
 }

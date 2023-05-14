@@ -10,7 +10,9 @@ import java.util.List;
 public class CartService {
     private static final CartService cartService = new CartService();
 
-    private CartService () {}
+    private CartService () {
+        cartList = new ArrayList<>();
+    }
 
     public static CartService getInstance() {
         return cartService;
@@ -54,37 +56,51 @@ public class CartService {
     public void printCart() {
         System.out.println("Current Cart:");
         for (int id : currentCart.getGameCart()) {
-            System.out.println(GameService.getInstance().viewGameByID(id));
+            if (id != 0) {
+                System.out.println(GameService.getInstance().viewGameByID(id));
+            }
         }
     }
 
-    public void addToCart(int id) {
+    public void addToCart() {
+        int id = GameService.getInstance().getCurrentGame().getId();
         if (checkIsPurchasable(id)) {
             currentCart.getGameCart().add(id);
+            System.out.println("add to cart successfully");
             printCart();
         }
     }
 
     public void removeFromCart(int id) {
         for (int gameID : currentCart.getGameCart()) {
-            if (gameID == id) {
-                int index = currentCart.getGameCart().indexOf(id);
-                currentCart.getGameCart().remove(index);
-                System.out.println("Removed");
-                printCart();
-                return;
+            if (gameID != 0) {
+                if (gameID == id) {
+                    int index = currentCart.getGameCart().indexOf(id);
+                    currentCart.getGameCart().remove(index);
+                    System.out.println("Removed");
+                    return;
+                }
             }
         }
         System.out.println("Game not in cart");
     }
 
+    public void removeAGameFromCart() {
+        System.out.println("Choose a game to remove from cart");
+        int choice = InputService.getInstance().inputChoice();
+        removeFromCart(choice);
+
+    }
+
     public void checkOut() {
         long totalAmount = 0;
         for (int id : currentCart.getGameCart()) {
-            for (Game game : GameService.getInstance().getGameList()) {
-                if (id == game.getId()) {
-                    totalAmount += game.getPrice();
-                    break;
+            if (id != 0) {
+                for (Game game : GameService.getInstance().getGameList()) {
+                    if (id == game.getId()) {
+                        totalAmount += game.getPrice();
+                        break;
+                    }
                 }
             }
         }
@@ -93,6 +109,12 @@ public class CartService {
             LibraryService.getInstance().addGameToLibrary(currentCart.getGameCart());
             System.out.println("Checkout successfully");
             FundService.getInstance().subtractFund(totalAmount);
+
+            //Empty current cart
+            Cart emptyCart = new Cart();
+            emptyCart.setId(currentCart.getId());
+            currentCart = emptyCart;
+            cartList.set(currentCart.getId() - 1, emptyCart);
         } else {
             System.out.println("Not enough money");
         }
@@ -110,5 +132,20 @@ public class CartService {
         Cart newCart = new Cart();
         cartList.add(newCart);
         currentCart = cartList.get(cartList.size() - 1);
+    }
+
+    public void addToCartByChoice(List<Integer> gameID) {
+        System.out.println("Select a game to add to cart");
+        int id;
+        while (true) {
+            id = InputService.getInstance().inputChoice();
+            if (gameID.contains(id)) {
+                break;
+            } else {
+                System.out.println("Invalid Input");
+            }
+        }
+        GameService.getInstance().setCurrentGame(GameService.getInstance().getGameList().get(id - 1));
+        addToCart();
     }
 }

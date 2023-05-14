@@ -101,7 +101,7 @@ public class Game {
     public String printGametags() {
         String text = "";
         for (Integer element : gametags) {
-            text += GameTagList.get(element) + ", ";
+            text += GameTagList.get(element) + " || ";
         }
         return text;
     }

@@ -1,9 +1,7 @@
 package view;
 
-import service.GameFileService;
-import service.InputService;
-import service.UserFileService;
-import service.UserService;
+import entity.Cart;
+import service.*;
 
 public class CustomerView {
     private static final CustomerView customerView = new CustomerView();
@@ -42,12 +40,18 @@ public class CustomerView {
                    AddFundView.getInstance().runAddFundMenu();
                    UserFileService.getInstance().writeUserList();
                }
+               case LIBRARY -> {
+                    LibraryView.getInstance().runLibraryMenu();
+               }
                case BROWSE_SHOP -> {
                     GameShopView.getInstance().runGameShopMenu();
                }
                case LOGOUT -> {
                    UserFileService.getInstance().writeUserList();
                    GameFileService.getInstance().writeGameList();
+                   LibraryFileService.getInstance().writeLibraryList();
+                   CartFileService.getInstance().writeCartList();
+                   ReviewFileService.getInstance().writeReviewList();
                }
                default -> {
                    System.out.println("Invalid Input");

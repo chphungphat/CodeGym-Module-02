@@ -17,6 +17,7 @@ public class Cart {
     public Cart() {
         this.id = count++;
         gameCart = new ArrayList<>();
+        gameCart.add(0);
     }
 
     public int getId() {

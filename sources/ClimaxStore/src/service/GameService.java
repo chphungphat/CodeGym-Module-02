@@ -74,13 +74,13 @@ public class GameService {
         int choice;
         while (true) {
             choice = InputService.getInstance().inputChoice();
-            if (choice < 0 || choice >= gameList.size()) {
+            if (choice < 1 || choice > gameList.size()) {
                 System.out.println("Invalid input");
             } else {
                 break;
             }
         }
-        currentGame = gameList.get(choice);
+        currentGame = gameList.get(choice - 1);
         System.out.println("Game info: ");
         System.out.println(currentGame.toString());
         System.out.println("Average rating: " + ReviewService.getInstance().getAverageRatingByGameID(currentGame.getId()));

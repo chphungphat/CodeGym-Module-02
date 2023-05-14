@@ -1,9 +1,6 @@
 package view;
 
-import service.GameFileService;
-import service.InputService;
-import service.UserFileService;
-import service.UserService;
+import service.*;
 
 public class StartUpView {
     private static final StartUpView startUpView = new StartUpView();
@@ -11,6 +8,9 @@ public class StartUpView {
     private StartUpView() {
         UserFileService.getInstance().readUserList();
         GameFileService.getInstance().readGameList();
+        LibraryFileService.getInstance().readLibraryList();
+        ReviewFileService.getInstance().readReviewList();
+        CartFileService.getInstance().readCartList();
     }
 
     public static StartUpView getInstance() {
@@ -36,7 +36,9 @@ public class StartUpView {
             switch (choice) {
                 case LOGIN -> {
                     if (LoginView.getInstance().displayLoginMenu()) {
-                        UserInfoView.getInstance().runUserInfoMenu();
+                        CustomerView.getInstance().runCustomerMenu();
+                    } else {
+                        System.out.println("Login unsuccessfully");
                     }
                 }
                 case REGISTER -> {
@@ -45,6 +47,10 @@ public class StartUpView {
                 }
                 case EXIT -> {
                     UserFileService.getInstance().writeUserList();
+                    GameFileService.getInstance().writeGameList();
+                    LibraryFileService.getInstance().writeLibraryList();
+                    ReviewFileService.getInstance().writeReviewList();
+                    CartFileService.getInstance().writeCartList();
                 }
                 default -> {
                     System.out.println("Invalid input");
