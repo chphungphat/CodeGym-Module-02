@@ -38,7 +38,7 @@ public class StartUpView {
             switch (choice) {
                 case LOGIN -> {
                     if (LoginView.getInstance().displayLoginMenu()) {
-                        if (UserService.getInstance().getCurrentUser().getName() == "Admin") {
+                        if (UserService.getInstance().getCurrentUser().getId() == 0) {
                             AdminView.getInstance().runAdminMenu();
                         } else {
                             CustomerView.getInstance().runCustomerMenu();

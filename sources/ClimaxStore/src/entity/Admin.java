@@ -24,6 +24,7 @@ public class Admin extends User {
 
     private Admin(String name, String phone, String password, LocalDate birthday, Address address, String email) {
         super(name, phone, password, birthday, address, email);
+        super.setId(0);
     }
 
     public static Admin getInstance() {
