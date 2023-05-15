@@ -57,7 +57,7 @@ public class LibraryService {
 
     public void printWishList() {
         System.out.println("Wish List: ");
-        for (int id : currentLibrary.getGameList()) {
+        for (int id : currentLibrary.getWishList()) {
             System.out.println(printGame(id));
         }
     }

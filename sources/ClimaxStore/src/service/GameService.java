@@ -102,6 +102,51 @@ public class GameService {
         }
     }
 
+    public void displayGameListByIDWithTag(List<Integer> gameID) {
+        if (gameID.isEmpty()) {
+            System.out.println("No such game");
+        } else {
+            for (Game game : gameList) {
+                for (Integer element : gameID) {
+                    if (game.getId() == element) {
+                        System.out.println(element + ". " + game.getName() + " " + game.printGametags());
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void displayGameListByIDWithPrice(List<Integer> gameID) {
+        if (gameID.isEmpty()) {
+            System.out.println("No such game");
+        } else {
+            for (Game game : gameList) {
+                for (Integer element : gameID) {
+                    if (game.getId() == element) {
+                        System.out.println(element + ". " + game.getName() + " " + game.getPrice());
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void displayGameListByIDWithDeveloper(List<Integer> gameID) {
+        if (gameID.isEmpty()) {
+            System.out.println("No such game");
+        } else {
+            for (Game game : gameList) {
+                for (Integer element : gameID) {
+                    if (game.getId() == element) {
+                        System.out.println(element + ". " + game.getName() + " " + game.getDeveloper());
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     public String getGameNameByID(int id) {
         for (Game game : gameList) {
             if (game.getId() == id) {

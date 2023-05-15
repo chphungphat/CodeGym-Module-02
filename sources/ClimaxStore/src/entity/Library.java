@@ -67,11 +67,11 @@ public class Library {
                 }
             } else if ((gameList.size() > 1) && (wishList.size() > 0)) {
                 newArray[0] = String.valueOf(gameList.size() - 1);
-                for (int index = 0; index < gameList.size() - 1; index++) {
-                    newArray[index + 1] = String.valueOf(gameList.get(index));
+                for (int index = 1; index < gameList.size(); index++) {
+                    newArray[index] = String.valueOf(gameList.get(index));
                 }
                 for (int index = 0; index < wishList.size(); index++) {
-                    newArray[index + gameList.size() + 1] = String.valueOf(gameList.get(index));
+                    newArray[index + gameList.size()] = String.valueOf(gameList.get(index));
                 }
                 return newArray;
             }

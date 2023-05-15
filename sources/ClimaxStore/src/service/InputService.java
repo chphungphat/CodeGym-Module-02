@@ -118,9 +118,9 @@ public class InputService {
     public double[] inputPriceRange() {
         double[] result = new double[2];
         while (true) {
-            System.out.print("Enter upper price range");
+            System.out.print("Enter upper price range: ");
             double upper = Double.parseDouble(scanner.nextLine());
-            System.out.print("Enter lower price range");
+            System.out.print("Enter lower price range: ");
             double lower = Double.parseDouble(scanner.nextLine());
             if (upper > lower) {
                 result[0] = lower;
@@ -137,7 +137,7 @@ public class InputService {
         List<Integer> result = new ArrayList<>();
         Game.displayGameTagList();
         while (true) {
-            System.out.print("Enter a gametag to search, input -1 to exit");
+            System.out.print("Enter a gametag to search, input -1 to exit: ");
             int choice = Integer.parseInt(scanner.nextLine());
             if ((choice < -1) || (choice > Game.GameTagList.size())) {
                 System.out.println("Invalid input");
@@ -148,5 +148,10 @@ public class InputService {
             }
         }
         return result;
+    }
+
+    public String inputDeveloper() {
+        System.out.print("Input developer's name: ");
+        return scanner.nextLine();
     }
 }

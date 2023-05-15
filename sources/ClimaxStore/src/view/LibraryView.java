@@ -2,6 +2,8 @@ package view;
 
 import service.InputService;
 import service.LibraryService;
+import service.ReceiptService;
+import service.UserService;
 
 public class LibraryView {
     private static final LibraryView libraryView = new LibraryView();
@@ -40,6 +42,9 @@ public class LibraryView {
                     LibraryService.getInstance().printWishList();
                     System.out.println();
                     WishListView.getInstance().runWishListMenu();
+                }
+                case VIEW_PURCHASE_HISTORY -> {
+                    ReceiptService.getInstance().viewReceiptByUserID(UserService.getInstance().getCurrentUser().getId());
                 }
                 default -> {
                     System.out.println("Invalid input");

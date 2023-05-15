@@ -3,7 +3,9 @@ package service;
 import entity.Cart;
 import entity.Customer;
 import entity.Game;
+import entity.Receipt;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,9 +108,17 @@ public class CartService {
         }
         System.out.println("Total amount is: " + totalAmount);
         if (totalAmount <= ((Customer) UserService.getInstance().getCurrentUser()).getWallet()) {
-            LibraryService.getInstance().addGameToLibrary(currentCart.getGameCart());
+            List<Integer> newGameList = new ArrayList<>();
+            for (int index = 1; index < currentCart.getGameCart().size(); index++) {
+                newGameList.add(currentCart.getGameCart().get(index));
+            }
+            LibraryService.getInstance().addGameToLibrary(newGameList);
             System.out.println("Checkout successfully");
             FundService.getInstance().subtractFund(totalAmount);
+
+            Receipt receipt = new Receipt(UserService.getInstance().getCurrentUser().getId(),
+                    LocalDateTime.now(), currentCart.getGameCart());
+            ReceiptService.getInstance().getReceiptList().add(receipt);
 
             //Empty current cart
             Cart emptyCart = new Cart();

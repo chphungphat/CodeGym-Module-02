@@ -10,9 +10,9 @@ public class SearchFactory {
     }
 
     private final String NAME = "name";
-    private final String PIRCE = "pirce";
+    private final String PIRCE = "price";
     private final String DEVELOPER = "developer";
-    private final String GAMETAGs = "gametags";
+    private final String GAMETAGS = "gametags";
 
     public Search getSearch(String searchBy) {
         Search newSearch = SearchByName.getInstance();
@@ -21,7 +21,13 @@ public class SearchFactory {
                 return SearchByName.getInstance();
             }
             case PIRCE -> {
-
+                return SearchByPrice.getInstance();
+            }
+            case GAMETAGS -> {
+                return SearchByGameTag.getInstance();
+            }
+            case DEVELOPER -> {
+                return SearchByDeveloper.getInstance();
             }
             default -> {
                 System.err.println("Error");

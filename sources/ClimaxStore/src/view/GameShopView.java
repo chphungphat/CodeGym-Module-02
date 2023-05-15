@@ -16,41 +16,12 @@ public class GameShopView {
     private final int VIEW_CART = 3;
     private final int EXIT = 4;
 
-    private final int VIEW_GAME = 1;
-    private final int GO_BACK = 2;
-
     public void displayGameShopMenu() {
         System.out.println("---------GAME SHOP MENU---------");
         System.out.println("1. Browse games");
         System.out.println("2. Search games");
         System.out.println("3. View cart");
         System.out.println("4. Exit");
-    }
-
-    public void displayViewGameMenu() {
-        System.out.println("1. View a game");
-        System.out.println("2. Go back");
-    }
-
-    public void runViewGameMenu() {
-        int choice = 0;
-        while (choice != GO_BACK) {
-            displayViewGameMenu();
-            choice = InputService.getInstance().inputChoice();
-            switch (choice) {
-                case VIEW_GAME -> {
-                    GameService.getInstance().viewGameList();
-                    GameService.getInstance().viewGameInfo();
-                    GameProductView.getInstance().runGameProductMenu();
-                }
-                case GO_BACK -> {
-                    LibraryFileService.getInstance().writeLibraryList();
-                }
-                default -> {
-                    System.out.println("Invalid Input");
-                }
-            }
-        }
     }
 
     public void runGameShopMenu() {
@@ -62,7 +33,7 @@ public class GameShopView {
                 case BROWSE_GAMES -> {
                     GameService.getInstance().viewGameList();
                     System.out.println();
-                    runViewGameMenu();
+                    GameView.getInstance().runViewGameMenu();
                 }
                 case SEARCH_GAMES -> {
                     SearchGameView.getInstance().runSearchMenu();
