@@ -23,7 +23,18 @@ public class RegisterView {
     public void displayRegisterMenu() {
         System.out.println("----------REGISTER----------");
         String name = InputService.getInstance().inputInfo("name");
-        String email = InputService.getInstance().inputInfo("email");
+        String email = "";
+        boolean isExit = true;
+        while (isExit) {
+            isExit = false;
+            email = InputService.getInstance().inputInfo("email");
+            for (User user : UserService.getInstance().getUserList()) {
+                if (email.equals(user.getEmail())) {
+                    System.out.println("Email has been used. Try with another one");
+                    isExit = true;
+                }
+            }
+        }
         String phone = InputService.getInstance().inputInfo("phone");
         System.out.println("Enter password with following requirement\n" +
                         "1. Password must contain at least one digit [0-9]\n" +
@@ -34,6 +45,7 @@ public class RegisterView {
         String password = InputService.getInstance().inputInfo("password");
         LocalDate birthDay = InputService.getInstance().inputBirthDate();
         Address address = InputService.getInstance().inputAddress();
+
 
         User newUser = CustomerBuilder.getInstance()
                 .name(name)

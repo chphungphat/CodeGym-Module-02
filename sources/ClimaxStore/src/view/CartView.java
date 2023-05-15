@@ -48,6 +48,7 @@ public class CartView {
                 }
                 case GO_BACK -> {
                     CartFileService.getInstance().writeCartList();
+                    LibraryFileService.getInstance().writeLibraryList();
                 }
                 default -> {
                     System.out.println("Invalid input");

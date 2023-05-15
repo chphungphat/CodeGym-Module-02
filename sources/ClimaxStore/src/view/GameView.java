@@ -1,7 +1,9 @@
 package view;
 
+import service.CartService;
 import service.GameService;
 import service.InputService;
+import service.file_service.CartFileService;
 import service.file_service.LibraryFileService;
 
 public class GameView {
@@ -31,8 +33,11 @@ public class GameView {
                     GameService.getInstance().viewGameInfo();
                     GameProductView.getInstance().runGameProductMenu();
                     System.out.println();
+                    LibraryFileService.getInstance().writeLibraryList();
+                    CartFileService.getInstance().writeCartList();
                 }
                 case GO_BACK -> {
+                    CartFileService.getInstance().writeCartList();
                     LibraryFileService.getInstance().writeLibraryList();
                 }
                 default -> {
