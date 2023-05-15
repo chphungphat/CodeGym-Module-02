@@ -1,6 +1,8 @@
 package view;
 
 import service.*;
+import service.file_service.LibraryFileService;
+import service.file_service.UserFileService;
 
 public class GameShopView {
     private static final GameShopView gameShopView = new GameShopView();

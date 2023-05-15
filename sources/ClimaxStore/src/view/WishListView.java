@@ -1,6 +1,8 @@
 package view;
 
 import service.*;
+import service.file_service.CartFileService;
+import service.file_service.LibraryFileService;
 
 public class WishListView {
     private static final WishListView wishListView = new WishListView();

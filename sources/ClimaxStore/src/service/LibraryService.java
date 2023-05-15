@@ -70,8 +70,11 @@ public class LibraryService {
         for (int id : gameIDList) {
             if (isGameInWishList(id)) {
                 currentLibrary.getWishList().remove((Integer) id);
+            } else {
+                if (id == 0) {
+                    currentLibrary.getGameList().add(id);
+                }
             }
-            currentLibrary.getGameList().add(id);
         }
         System.out.println("Games added to your library: ");
         for (int id : gameIDList) {

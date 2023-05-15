@@ -119,6 +119,7 @@ public class CartService {
             Receipt receipt = new Receipt(UserService.getInstance().getCurrentUser().getId(),
                     LocalDateTime.now(), currentCart.getGameCart());
             ReceiptService.getInstance().getReceiptList().add(receipt);
+            ReceiptService.getInstance().printLastReceipt();
 
             //Empty current cart
             Cart emptyCart = new Cart();

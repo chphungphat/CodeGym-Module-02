@@ -1,6 +1,7 @@
 package view;
 
 import service.*;
+import service.file_service.*;
 
 public class StartUpView {
     private static final StartUpView startUpView = new StartUpView();
@@ -11,6 +12,7 @@ public class StartUpView {
         LibraryFileService.getInstance().readLibraryList();
         ReviewFileService.getInstance().readReviewList();
         CartFileService.getInstance().readCartList();
+        ReceiptFileService.getInstance().readReceiptList();
     }
 
     public static StartUpView getInstance() {
@@ -36,7 +38,11 @@ public class StartUpView {
             switch (choice) {
                 case LOGIN -> {
                     if (LoginView.getInstance().displayLoginMenu()) {
-                        CustomerView.getInstance().runCustomerMenu();
+                        if (UserService.getInstance().getCurrentUser().getName() == "Admin") {
+                            AdminView.getInstance().runAdminMenu();
+                        } else {
+                            CustomerView.getInstance().runCustomerMenu();
+                        }
                     } else {
                         System.out.println("Login unsuccessfully");
                     }

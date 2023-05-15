@@ -1,52 +1,53 @@
-package service;
+package service.file_service;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
-import entity.Cart;
+import entity.Library;
+import service.LibraryService;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CartFileService {
-    private static final CartFileService cartFileService = new CartFileService();
+public class LibraryFileService {
+    private static final LibraryFileService libraryFileService = new LibraryFileService();
 
-    private CartFileService() {}
+    private LibraryFileService() {}
 
-    public static CartFileService getInstance() {
-        return cartFileService;
+    public static LibraryFileService getInstance() {
+        return libraryFileService;
     }
 
-    private final String CART_FILEPATH = "src//data//cart.csv";
+    private final String LIBRARY_FILEPATH = "src//data//library.csv";
 
-    public void writeCartList() {
+    public void writeLibraryList() {
         try {
-            FileWriter fw = new FileWriter(CART_FILEPATH);
+            FileWriter fw = new FileWriter(LIBRARY_FILEPATH);
             CSVWriter csvWriter = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR,
                                                     CSVWriter.NO_QUOTE_CHARACTER,
                                                     CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                                                     CSVWriter.DEFAULT_LINE_END);
-            for (Cart cart : CartService.getInstance().getCartList()) {
-                String[] cartStringArray = cart.toArray();
-                csvWriter.writeNext(cartStringArray);
+            for (Library library : LibraryService.getInstance().getLibraryList()) {
+                String[] libraryStringArray = library.toArray();
+                csvWriter.writeNext(libraryStringArray);
             }
             csvWriter.close();
             fw.close();
         } catch (IOException exception) {
-            System.err.println("Write file Error");
+            System.out.println("Write file Error");
             exception.printStackTrace();
         }
     }
 
-    public void readCartList() {
+    public void readLibraryList() {
         try {
-            FileReader fr = new FileReader(CART_FILEPATH);
+            FileReader fr = new FileReader(LIBRARY_FILEPATH);
             CSVReader csvReader = new CSVReader(fr);
             String[] data;
             while ((data = csvReader.readNext()) != null) {
-                Cart newCart = CartService.getInstance().toCart(data);
-                CartService.getInstance().getCartList().add(newCart);
+                Library newLibrary = LibraryService.getInstance().toLibrary(data);
+                LibraryService.getInstance().getLibraryList().add(newLibrary);
             }
             csvReader.close();
             fr.close();

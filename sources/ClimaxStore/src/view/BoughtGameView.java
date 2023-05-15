@@ -2,10 +2,8 @@ package view;
 
 import service.InputService;
 import service.LibraryService;
-import service.ReviewFileService;
+import service.file_service.ReviewFileService;
 import service.ReviewService;
-
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class BoughtGameView {
     private static final BoughtGameView boughtGameView = new BoughtGameView();

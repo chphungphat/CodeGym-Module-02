@@ -2,7 +2,7 @@ package view;
 
 import service.GameService;
 import service.InputService;
-import service.LibraryFileService;
+import service.file_service.LibraryFileService;
 
 public class GameView {
     private static final GameView gameView = new GameView();
@@ -30,6 +30,7 @@ public class GameView {
                 case VIEW_GAME -> {
                     GameService.getInstance().viewGameInfo();
                     GameProductView.getInstance().runGameProductMenu();
+                    System.out.println();
                 }
                 case GO_BACK -> {
                     LibraryFileService.getInstance().writeLibraryList();
@@ -38,6 +39,7 @@ public class GameView {
                     System.out.println("Invalid Input");
                 }
             }
+            GameService.getInstance().viewGameList();
         }
     }
 }

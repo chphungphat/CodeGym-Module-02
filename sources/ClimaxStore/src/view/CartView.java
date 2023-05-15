@@ -1,9 +1,9 @@
 package view;
 
-import service.CartFileService;
-import service.CartService;
-import service.InputService;
-import service.LibraryFileService;
+import service.*;
+import service.file_service.CartFileService;
+import service.file_service.LibraryFileService;
+import service.file_service.ReceiptFileService;
 
 public class CartView {
     private static final CartView cartView = new CartView();
@@ -36,6 +36,7 @@ public class CartView {
                     CartService.getInstance().checkOut();
                     CartFileService.getInstance().writeCartList();
                     LibraryFileService.getInstance().writeLibraryList();
+                    ReceiptFileService.getInstance().writeReceiptList();
                     choice = GO_BACK;
                 }
                 case REMOVE_FROM_CART -> {

@@ -1,6 +1,7 @@
 package service;
 
 import builder.AddressBuilder;
+import builder.GameBuilder;
 import entity.Address;
 import entity.Game;
 
@@ -153,5 +154,38 @@ public class InputService {
     public String inputDeveloper() {
         System.out.print("Input developer's name: ");
         return scanner.nextLine();
+    }
+
+    public Game inputGameInfo() {
+        System.out.print("Enter game's name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter game's price: ");
+        long price = Long.parseLong(scanner.nextLine());
+        System.out.print("Enter developer name: ");
+        String dev = scanner.nextLine();
+        System.out.print("Enter release date: ");
+        LocalDate date = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        System.out.println("Add game tags");
+        Game.displayGameTagList();
+        List<Integer> gametags = new ArrayList<>();
+        while (true) {
+            System.out.print("Enter gametag id, enter -1 to exit: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+            if (choice != -1) {
+                if ((choice < -1) || (choice >= Game.GameTagList.size())) {
+                    System.out.println("Invalid Input");
+                } else {
+                    gametags.add(choice);
+                }
+            } else {
+                break;
+            }
+        }
+        return GameBuilder.getInstance().name(name)
+                .price(price)
+                .developer(dev)
+                .releaseDate(date)
+                .gametags(gametags)
+                .build();
     }
 }

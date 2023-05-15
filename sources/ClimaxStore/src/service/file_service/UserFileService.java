@@ -1,4 +1,4 @@
-package service;
+package service.file_service;
 
 import builder.AddressBuilder;
 import builder.CustomerBuilder;
@@ -8,6 +8,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import entity.Address;
 import entity.Customer;
 import entity.User;
+import service.UserService;
 
 import java.io.File;
 import java.io.FileReader;
@@ -15,8 +16,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
 
 public class UserFileService {
     private static final UserFileService userFileService = new UserFileService();

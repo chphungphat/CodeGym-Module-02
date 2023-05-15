@@ -11,7 +11,9 @@ import java.util.List;
 public class ReceiptService {
     private static final ReceiptService receiptService = new ReceiptService();
 
-    private ReceiptService() {}
+    private ReceiptService() {
+        receiptList = new ArrayList<>();
+    }
 
     public static ReceiptService getInstance() {
         return receiptService;
@@ -33,7 +35,7 @@ public class ReceiptService {
 
     public void printReceipt(int index) {
         String userName = UserService.getInstance().getUserNameByID(receiptList.get(index).getUserID());
-        String checkOutDate = receiptList.get(index).getCheckOutTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        String checkOutDate = receiptList.get(index).getCheckOutTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         long total = getTotalPay(receiptList.get(index));
         System.out.println("Receipt:");
         System.out.println("Customer name: " + userName);
